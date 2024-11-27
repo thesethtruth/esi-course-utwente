@@ -1,11 +1,10 @@
-# Installation guide: Energy System Intergration
+# Installation Guide: Energy System Integration
 
-This guide will help you installing Python on your computer. Additionally, it will help you install VSCode as IDE (interactive development environment) and Poetry as environment manager. Below is a short introduction, why you need these three components and what they do.
+This guide will help you install Python on your computer. Additionally, it will guide you through installing VSCode as your IDE (Integrated Development Environment) and Poetry as your environment manager. Below is a brief introduction explaining why you need these three components and what they do.
 
+> **Note:** You are free to choose your own IDE, package manager, or even operating system as long as you can use [PyPSA](https://pypsa.readthedocs.io/en/latest/getting-started/installation.html). This guide is written for Windows.
 
-> **Note:** You are completely free to choose your own IDE and package manager or even OS as long as you can use [PyPSA](https://pypsa.readthedocs.io/en/latest/getting-started/installation.html). This guide is written for Windows. 
-
-## Explainer: Why Python, VScode and Poetry?
+## Explainer: Why Python, VSCode, and Poetry?
 
 To get started with programming and projects like PyPSA (Python for Power System Analysis), you'll need a few key tools. Here’s why Python, VSCode, and Poetry are essential:
 
@@ -14,7 +13,7 @@ To get started with programming and projects like PyPSA (Python for Power System
 Python is a popular, easy-to-learn programming language used for many applications.
 
 **Why do you need Python?**
-- **Core Language**: PyPSA is written in Python, so you need it to run and modify PyPSA. Without installing Python, we can't run Python code or modules.
+- **Core Language**: PyPSA is written in Python, so you need it to run and modify PyPSA.
 - **Libraries**: Python has many libraries that simplify tasks. Poetry helps manage these libraries easily.
 
 ### VSCode (Visual Studio Code)
@@ -37,15 +36,15 @@ These tools work together to make your programming experience smoother and more 
 
 Remember, this guide is for Windows, but you can use these tools on any operating system. Happy coding!
 
-## Installation steps
+## Installation Steps
 
 ### Step 1 - Install Python 
 
-Install Python 3.12 from the official Python website: https://www.python.org/downloads/windows/. If you don't know which version you need, you will probably be using the [64-bit AMD version](https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe).
+Install Python 3.12 from the official Python website: [Python Downloads for Windows](https://www.python.org/downloads/windows/). If you don't know which version you need, you will probably be using the [64-bit AMD version](https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe).
 
 ### Step 2 - Install Poetry 
 
-You can follow the official guide on [Poetry](https://python-poetry.org/docs/#installing-with-pipx), or the steps below.
+You can follow the official guide on [Poetry](https://python-poetry.org/docs/#installing-with-pipx), or follow the steps below.
 
 #### Install pipx
 ```bash
@@ -80,7 +79,7 @@ This will make your life easier. Use the extensions tab on the left side (the bl
 
 Make a folder on your desired location. For instance, I use `C:\Users\Seth\coding\esi-course`.
 
-Open this folder in VScode (through `File>Open Folder...` or `CTRL+K` and then `CTRL+O`).
+Open this folder in VScode (through `File > Open Folder...` or `CTRL+K` and then `CTRL+O`).
 
 ### Step 5 - Download the contents of this course repo
 
