@@ -1,0 +1,5 @@
+tech,capital_cost,marginal_cost,efficiency
+solar,350,0.5,
+wind,1200,3,
+battery inverter,350,,0.95
+battery storage,260,,
