@@ -4,4 +4,11 @@
 format: jb-book
 root: intro
 chapters:
-- file: 01-workshop-data-analysis
+- file: 01-tutorial-data-analysis
+- file: 01-exercises-data-analysis
+- file: 02-tutorial-scenario-modelling
+- file: 02-exercises-scenario-modelling
+- file: 03-tutorial-capacity-expansion
+- file: 03-exercises-capacity-expansion
+- file: 04-tutorial-storage-and-interconnection
+- file: 04-exercises-storage-and-interconnection

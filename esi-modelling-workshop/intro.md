@@ -5,11 +5,13 @@ Welcome to the website for the energy modelling workshop of the course Energy Sy
 
 This workshop covers an introduction to energy system modelling in the context of Energy System Integration. It is based around an optimisation approach using PyPSA. Topics covered in this tutorial:
 
-- time series analysis (e.g. wind and solar production)
+- time series analysis (e.g. wind and solar production, load curves)
 - geographical data (e.g. location of power plants)
+- demand scenario modelling using the ETM
 - data visualisation
-- optimisation
 - capacity expansion planning
+- storage and dispatchable generators
+- multi-nodal networks
 - interactive visualisation and dashboarding
 
 
