@@ -1,6 +1,7 @@
 pypsa==0.31.1
 seaborn==0.13.2
 highspy==1.8.1
+jupyter-book
 ipython
 jupyterlab
 matplotlib
