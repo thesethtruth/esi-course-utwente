@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Yessir &#8212; Energy system modelling workshop ESI</title>
+    <title>3 exercises: capacity expansion &#8212; Energy system modelling workshop ESI</title>
   
   
   
@@ -60,11 +60,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '01-workshop-data-analysis';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03-exercises-capacity-expansion';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome" href="intro.html" />
+    <link rel="next" title="4 tutorial: Storage and interconnection" href="04-tutorial-storage-and-interconnection.html" />
+    <link rel="prev" title="3 tutorial: Capacity expansion" href="03-tutorial-capacity-expansion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -169,7 +170,14 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Yessir</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-tutorial-data-analysis.html">1 tutorial: energy data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">1 exercises: data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">2 tutorial: scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">2 exercises: scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">3 tutorial: Capacity expansion</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3 exercises: capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tutorial-storage-and-interconnection.html">4 tutorial: Storage and interconnection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-exercises-storage-and-interconnection.html">4 exercises: storage and interconnection</a></li>
 </ul>
 
     </div>
@@ -213,37 +221,6 @@
 <div class="article-header-buttons">
 
 
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/thesethtruth/esi-course-utwente/blob/main/esi-modelling-workshop/01-workshop-data-analysis.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
 <a href="https://github.com/thesethtruth/esi-course-utwente" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
@@ -270,7 +247,7 @@
       
       
       
-      <li><a href="_sources/01-workshop-data-analysis.ipynb" target="_blank"
+      <li><a href="_sources/03-exercises-capacity-expansion.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -280,7 +257,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -344,7 +321,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Yessir</h1>
+    <h1>3 exercises: capacity expansion</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,8 +335,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="yessir">
-<h1>Yessir<a class="headerlink" href="#yessir" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercises-capacity-expansion">
+<h1>3 exercises: capacity expansion<a class="headerlink" href="#exercises-capacity-expansion" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,13 +370,22 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="03-tutorial-capacity-expansion.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome</p>
+        <p class="prev-next-title">3 tutorial: Capacity expansion</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="04-tutorial-storage-and-interconnection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4 tutorial: Storage and interconnection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
