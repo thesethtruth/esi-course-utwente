@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1 tutorial: Energy data analysis &#8212; Energy system modelling workshop ESI</title>
+    <title>Tutorial 1: Energy data analysis &#8212; Energy system modelling workshop ESI</title>
   
   
   
@@ -66,7 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1 exercises: Data analysis" href="01-exercises-data-analysis.html" />
+    <link rel="next" title="Exercises 1: Data analysis" href="01-exercises-data-analysis.html" />
     <link rel="prev" title="Welcome" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,12 +172,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1 tutorial: Energy data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">1 exercises: Data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">2 tutorial: Scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">2 exercises: Scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">3 tutorial: Capacity expansion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">3 exercises: Capacity expansion</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial 1: Energy data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">Exercises 1: Data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">Tutorial 2: Energy System Scenario Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">Exercises 2: Scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">Tutorial 3: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">Exercises 3: Capacity expansion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-tutorial-storage-and-interconnection.html">4 tutorial: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-exercises-storage-and-interconnection.html">4 exercises: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
@@ -357,7 +357,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1 tutorial: Energy data analysis</h1>
+    <h1>Tutorial 1: Energy data analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,16 +374,14 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand">Energy demand</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-the-generation-data">Visualise the generation data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-the-plot">Analyse the plot</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-indicators-of-energy-generation">Statistical indicators of energy generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-generation-data-analysis">Energy generation data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-the-plot">Analyse the plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-indicators-of-energy-generation">Statistical indicators of energy generation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand-analysis">Energy demand analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-demand">Plot the energy demand</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand-data-analysis">Energy demand data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-demand">Plot the energy demand</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-electricity-demand-curves">Analysis of electricity demand curves</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-peak-energy-and-energy-share-graph">Analysis of peak energy and energy share graph</a></li>
 </ul>
@@ -400,8 +398,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-energy-data-analysis">
-<h1>1 tutorial: Energy data analysis<a class="headerlink" href="#tutorial-energy-data-analysis" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-1-energy-data-analysis">
+<h1>Tutorial 1: Energy data analysis<a class="headerlink" href="#tutorial-1-energy-data-analysis" title="Link to this heading">#</a></h1>
 <p>This tutorial will learn you how to use data analysis to obtain insight into the context of your energy system. This allows you to get a feeling for the challenges you will have to solve using energy system integration. By first understanding the context, you can better formulate your research questions and hypothesis. Moreover, it forms the fundamental understanding of your energy system that will allow you to explain system dynamics that arise.</p>
 <section id="fetching-the-data">
 <h2>Fetching the data<a class="headerlink" href="#fetching-the-data" title="Link to this heading">#</a></h2>
@@ -480,8 +478,9 @@
 </div>
 </div>
 </div>
-<section id="visualise-the-generation-data">
-<h3>Visualise the generation data<a class="headerlink" href="#visualise-the-generation-data" title="Link to this heading">#</a></h3>
+</section>
+<section id="energy-generation-data-analysis">
+<h2>Energy generation data analysis<a class="headerlink" href="#energy-generation-data-analysis" title="Link to this heading">#</a></h2>
 <p>With the files loaded, we can visualise the energy generation data. We will first set the seaborn theming and initiate the plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -491,8 +490,9 @@
 <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span>
 
 <span class="c1"># Set up the matplotlib figure</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
 
 <span class="n">wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -515,10 +515,9 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Solar energy generation (-)&#39;}, xlabel=&#39;time&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/ac04e9638b40b866e372a821807057d6eca6cc577437a079d1cd4f2a9d01dcbe.png" src="_images/ac04e9638b40b866e372a821807057d6eca6cc577437a079d1cd4f2a9d01dcbe.png" />
+<img alt="_images/b52c038dc8c6e2e45e2c7255470b59c223f860ce352a4f21eea0e5b183ad351f.png" src="_images/b52c038dc8c6e2e45e2c7255470b59c223f860ce352a4f21eea0e5b183ad351f.png" />
 </div>
 </div>
-</section>
 <section id="analyse-the-plot">
 <h3>Analyse the plot<a class="headerlink" href="#analyse-the-plot" title="Link to this heading">#</a></h3>
 <p>From this figure we can see that the wind and solar energy generation are highly variable. This is due to the fact that the wind and solar energy generation are dependent on the weather conditions.This variability in the wind and solar energy generation can make it difficult to integrate these energy sources into the electricity grid. This is why it is important to have a mix of different energy sources, interconnection and storage in the electricity grid, so that the variability of the wind and solar energy generation can be balanced out by other energy system components.</p>
@@ -541,8 +540,9 @@
 \end{equation*}\]</div>
 <p>In contrast, dispatchable energy sources, such as coal, natural gas, and nuclear plants, could theoretically run continuously for the whole year, giving them a potential FLH of 8,760 hours, minus any downtime for maintenance or other interruptions. Typically, market conditions prevent these sources from getting near to these FLHs from occurring.</p>
 </div>
+</section>
 <section id="statistical-indicators-of-energy-generation">
-<h4>Statistical indicators of energy generation<a class="headerlink" href="#statistical-indicators-of-energy-generation" title="Link to this heading">#</a></h4>
+<h3>Statistical indicators of energy generation<a class="headerlink" href="#statistical-indicators-of-energy-generation" title="Link to this heading">#</a></h3>
 <p>Lets determine the FLH per technology and the monthly capacity factor using the equations above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -600,8 +600,8 @@ Solar FLH: 1362.12 hours
 <p>These patterns have important implications for energy system design. The complementary nature of wind and solar suggests benefits in combining both technologies, though the relatively low capacity factors highlight why installed capacity must exceed average demand. The seasonal variations also emphasize the need for storage solutions or backup power sources to maintain reliable supply throughout the year.</p>
 </section>
 </section>
-<section id="energy-demand-analysis">
-<h3>Energy demand analysis<a class="headerlink" href="#energy-demand-analysis" title="Link to this heading">#</a></h3>
+<section id="energy-demand-data-analysis">
+<h2>Energy demand data analysis<a class="headerlink" href="#energy-demand-data-analysis" title="Link to this heading">#</a></h2>
 <p>Let us now analyse the energy demand. We will investigate it by determinging the:</p>
 <ul class="simple">
 <li><p>The distribution of demand across the categories based on <strong>energy</strong></p></li>
@@ -654,7 +654,7 @@ Solar FLH: 1362.12 hours
 </div>
 </div>
 <section id="plot-the-energy-demand">
-<h4>Plot the energy demand<a class="headerlink" href="#plot-the-energy-demand" title="Link to this heading">#</a></h4>
+<h3>Plot the energy demand<a class="headerlink" href="#plot-the-energy-demand" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the matplotlib figure</span>
@@ -665,7 +665,7 @@ Solar FLH: 1362.12 hours
 
 <span class="c1"># determine the top demand categories and sum the rest to &#39;other&#39;</span>
 <span class="n">top_demand</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">other_demand</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">top_demand</span><span class="p">)</span>
+<span class="n">other_demand</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">top_demand</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
 <span class="n">plottable_demand</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">top_demand</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
 <span class="n">plottable_demand</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Other&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">other_demand</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -696,7 +696,7 @@ Solar FLH: 1362.12 hours
 <span class="n">mne_demand</span> <span class="o">=</span> <span class="n">monthly_demand</span> <span class="o">/</span> <span class="n">mean_monthly_demand</span>
 
 <span class="c1"># overwrite the monthly demand with the plottable demand</span>
-<span class="n">monthly_demand</span> <span class="o">=</span> <span class="n">plottable_demand</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">monthly_demand</span> <span class="o">=</span> <span class="n">plottable_demand</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
 
 <span class="c1"># Set up the matplotlib figure</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -732,18 +732,17 @@ Solar FLH: 1362.12 hours
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f3ef2e32d50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f781e1a94d0&gt;
 </pre></div>
 </div>
-<img alt="_images/7b5f2f3410f2b003425bf65265207ecad50873adf9808cd3368f008f2f0c92f1.png" src="_images/7b5f2f3410f2b003425bf65265207ecad50873adf9808cd3368f008f2f0c92f1.png" />
-<img alt="_images/7b8c4ed31ab21dfd42257ed20573927cd4d813b04f47e5bb6def32ff02305c9f.png" src="_images/7b8c4ed31ab21dfd42257ed20573927cd4d813b04f47e5bb6def32ff02305c9f.png" />
+<img alt="_images/11da5e5e9d536f51373a767fd0b61da5fcaa37a0225ff1638218c6d821bf80e6.png" src="_images/11da5e5e9d536f51373a767fd0b61da5fcaa37a0225ff1638218c6d821bf80e6.png" />
+<img alt="_images/86f9a468f819ec0b7296d3c880e2d34c3d3b66b105ea5c11dc05b99b88a62894.png" src="_images/86f9a468f819ec0b7296d3c880e2d34c3d3b66b105ea5c11dc05b99b88a62894.png" />
 </div>
 </div>
-</section>
 </section>
 <section id="analysis-of-electricity-demand-curves">
 <h3>Analysis of electricity demand curves<a class="headerlink" href="#analysis-of-electricity-demand-curves" title="Link to this heading">#</a></h3>
-<p>From this figure we can observe a lot of weekly cyclic behaviour - showing higher demand during weekdays and noticeable drops during weekends - because of industrial demand. Furthermore, the energy demand is higher in the winter than during the summer period. Also, we can see a longer period with high demand from space heating in the first three weeks of February. We will have to keep this in mind when we do system integration, as we now have some sort of idea what might form a pinch point for this energy system.</p>
+<p>From this figure we can observe a lot of weekly cyclic behaviour - showing higher demand during weekdays and noticeable drops during weekends. This is mostly due to heating and appliances demand from (utility) buildings and transport. The baseload is made up by industrial processes and very steady throughout the year. Furthermore, the energy demand is higher in the winter than during the summer period. Also, we can see a longer period with high demand from space heating in the first three weeks of February. We will have to keep this in mind when we do system integration, as we now have some sort of idea what might form a pinch point for this energy system.</p>
 <p>The seasonal pattern aligns with what we saw earlier in the renewable generation capacity factors, which will be critical for matching supply and demand.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -838,7 +837,7 @@ In contrast, industrial and transport sectors show more balanced patterns, with 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1 exercises: Data analysis</p>
+        <p class="prev-next-title">Exercises 1: Data analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -866,16 +865,14 @@ In contrast, industrial and transport sectors show more balanced patterns, with 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand">Energy demand</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-the-generation-data">Visualise the generation data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-the-plot">Analyse the plot</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-indicators-of-energy-generation">Statistical indicators of energy generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-generation-data-analysis">Energy generation data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-the-plot">Analyse the plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-indicators-of-energy-generation">Statistical indicators of energy generation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand-analysis">Energy demand analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-demand">Plot the energy demand</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-demand-data-analysis">Energy demand data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-demand">Plot the energy demand</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-electricity-demand-curves">Analysis of electricity demand curves</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-peak-energy-and-energy-share-graph">Analysis of peak energy and energy share graph</a></li>
 </ul>

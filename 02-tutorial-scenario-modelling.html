@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2 tutorial: Scenario modelling &#8212; Energy system modelling workshop ESI</title>
+    <title>Tutorial 2: Energy System Scenario Modelling &#8212; Energy system modelling workshop ESI</title>
   
   
   
@@ -64,8 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2 exercises: Scenario modelling" href="02-exercises-scenario-modelling.html" />
-    <link rel="prev" title="1 exercises: Data analysis" href="01-exercises-data-analysis.html" />
+    <link rel="next" title="Exercises 2: Scenario modelling" href="02-exercises-scenario-modelling.html" />
+    <link rel="prev" title="Exercises 1: Data analysis" href="01-exercises-data-analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,12 +170,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-tutorial-data-analysis.html">1 tutorial: Energy data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">1 exercises: Data analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2 tutorial: Scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">2 exercises: Scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">3 tutorial: Capacity expansion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">3 exercises: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-tutorial-data-analysis.html">Tutorial 1: Energy data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">Exercises 1: Data analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial 2: Energy System Scenario Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">Exercises 2: Scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">Tutorial 3: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">Exercises 3: Capacity expansion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-tutorial-storage-and-interconnection.html">4 tutorial: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-exercises-storage-and-interconnection.html">4 exercises: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
@@ -311,7 +311,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -322,11 +324,41 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2 tutorial: Scenario modelling</h1>
+    <h1>Tutorial 2: Energy System Scenario Modelling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-and-background">Context and background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-scenario">Starting the scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-etm-interface">Overview of the ETM interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sidebar-navigation">1. Sidebar navigation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-display">2. Chart display</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboard-overview">3. Dashboard overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-household-heating-parameters">Modifying household heating parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-extreme-heating-scenarios">Testing extreme heating scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-100-air-heat-pumps">Scenario 1: 100% air heat pumps</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-100-electric-boilers">Scenario 2: 100% electric boilers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-transport-parameters">Modifying Transport Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smart-charging-for-electric-vehicles">Smart Charging for Electric Vehicles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-hourly-load-curves">Downloading the hourly load curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -336,8 +368,180 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-scenario-modelling">
-<h1>2 tutorial: Scenario modelling<a class="headerlink" href="#tutorial-scenario-modelling" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-2-energy-system-scenario-modelling">
+<h1>Tutorial 2: Energy System Scenario Modelling<a class="headerlink" href="#tutorial-2-energy-system-scenario-modelling" title="Link to this heading">#</a></h1>
+<p>In this tutorial chapter, we will explore how to make specific changes to base scenarios in the Energy Transition Model (ETM), a comprehensive tool for energy system modeling.</p>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Understand the ETM interface and its key components</p></li>
+<li><p>Learn to modify existing scenarios in the ETM</p></li>
+<li><p>Explore the II3050 Decentral Incentives scenario for the Netherlands in 2050</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this tutorial, we will make intentionally significant changes to the scenario to clearly demonstrate the model’s behavior and the relationships between different parameters. In real-world applications, scenario modifications typically involve more nuanced adjustments based on detailed analysis and sector-specific knowledge.</p>
+</div>
+</section>
+<section id="context-and-background">
+<h2>Context and background<a class="headerlink" href="#context-and-background" title="Link to this heading">#</a></h2>
+<p>We use the ETM to model demand scenarios that we later soft-couple to our optimisation model. The ETM is particularly relevant as it’s used by grid operators to define the <a class="reference external" href="https://www.netbeheernederland.nl/publicatie/rapport-ii3050-scenarios">scenarios</a> for the <a class="reference external" href="https://www.netbeheernederland.nl/publicatie/integrale-infrastructuur-verkenning-2030-2050">Integral Grid Outlook</a> (II3050) at the Dutch national level. For European-scale modeling, the <a class="reference external" href="https://2022.entsos-tyndp-scenarios.eu/">Ten Year Network Development Plan</a> (TYNDP) scenarios, defined by ENTSO-e and ENTSO-g, are <a class="reference external" href="https://zenodo.org/records/8214522">also available</a> through the <a class="reference external" href="https://northseawindpowerhub.eu/">North Sea Wind Power Hub</a> (NSWPH) research initiative.</p>
+</section>
+<section id="starting-the-scenario">
+<h2>Starting the scenario<a class="headerlink" href="#starting-the-scenario" title="Link to this heading">#</a></h2>
+<p>Click on the <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">scenario</span></code> button to access the <a class="reference external" href="https://energytransitionmodel.com/saved_scenarios/14552">Decentral Incentives</a> scenario, one of the II3050 scenarios for the horizon year 2050.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When opening a predefined (saved) scenario, a session scenario is created. This session scenario is your personal copy with all original settings. You can freely make changes, but saving them requires creating an account.</p>
+</div>
+<p><img alt="ETM interface showing the II3050 Decentral Incentives scenario start screen" src="_images/etm_startscreen.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Scenario Background</strong>: The Decentral Incentives scenario represents a future where:</p>
+<ul class="simple">
+<li><p>The Netherlands embraces decentralized climate action</p></li>
+<li><p>Local communities and private initiatives drive the energy transition</p></li>
+<li><p>Citizen-led projects lead renewable energy adoption</p></li>
+<li><p>Traditional heavy industry sees decline</p></li>
+<li><p>Heating solutions become diverse and localized, ranging from heat pumps to green hydrogen</p></li>
+</ul>
+</div>
+</section>
+<section id="overview-of-the-etm-interface">
+<h2>Overview of the ETM interface<a class="headerlink" href="#overview-of-the-etm-interface" title="Link to this heading">#</a></h2>
+<p>Below is a comprehensive overview of the main interface elements in the ETM.</p>
+<p><img alt="Overview of the ETM interface showing main components" src="_images/etm_overview.png" /></p>
+<section id="sidebar-navigation">
+<h3>1. Sidebar navigation<a class="headerlink" href="#sidebar-navigation" title="Link to this heading">#</a></h3>
+<p>The sidebar provides access to six major categories:</p>
+<ol class="arabic simple">
+<li><p>Demand</p></li>
+<li><p>Supply</p></li>
+<li><p>Flexibility</p></li>
+<li><p>Emissions</p></li>
+<li><p>Costs &amp; efficiencies</p></li>
+<li><p>Results &amp; data</p></li>
+</ol>
+<p>Selecting a major category reveals its subcategories in an accordion menu between the sidebar and chart element.</p>
+</section>
+<section id="chart-display">
+<h3>2. Chart display<a class="headerlink" href="#chart-display" title="Link to this heading">#</a></h3>
+<p>The chart element shows relevant visualizations based on your selected categories. Features include:</p>
+<ul class="simple">
+<li><p>Chart locking via the top-right lock icon</p></li>
+<li><p>Additional charts through the <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">See</span> <span class="pre">more</span> <span class="pre">charts</span></code> button</p></li>
+<li><p>Dynamic updates based on scenario modifications</p></li>
+</ul>
+</section>
+<section id="dashboard-overview">
+<h3>3. Dashboard overview<a class="headerlink" href="#dashboard-overview" title="Link to this heading">#</a></h3>
+<p>The dashboard displays key performance indicators (KPIs) including:</p>
+<ul class="simple">
+<li><p>CO2 reduction</p></li>
+<li><p>Energy use reduction</p></li>
+<li><p>Cost metrics</p></li>
+</ul>
+<p>Customize  the visible KPIs using the settings wheel in the black button on the dashboard’s right side.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ETM generates all results on demand. Any input change or view modification triggers a model run, typically taking 3-7 seconds to update. For more details about the ETM’s architecture, consult the <a class="reference external" href="https://docs.energytransitionmodel.com/main/intro/">documentation</a>.</p>
+</div>
+<p>Now, let use make some changes to the scenario. As we use the ETM to model the demand we will use as input for our optimisation model, we focus on demand categories for now.</p>
+</section>
+</section>
+<section id="modifying-household-heating-parameters">
+<h2>Modifying household heating parameters<a class="headerlink" href="#modifying-household-heating-parameters" title="Link to this heading">#</a></h2>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Demand</span> <span class="pre">&gt;</span> <span class="pre">Households</span> <span class="pre">&gt;</span> <span class="pre">Space</span> <span class="pre">heating</span> <span class="pre">&amp;</span> <span class="pre">hot</span> <span class="pre">water</span></code>. In the base scenario, solar thermal plays a significant role in hot water generation, producing 22 PJ in 2050. Let’s examine how this assumption affects both renewability and grid requirements.</p>
+<p><img alt="ETM interface showing household space heating and hot water settings" src="_images/etm_spaceheating.png" /></p>
+<p>When we adjust the solar thermal slider to 0%, we observe:</p>
+<ul class="simple">
+<li><p>A modest 0.1% decrease in overall renewability</p></li>
+<li><p>A notable increase in biomass imports</p></li>
+<li><p>Changes in heat network supply composition</p></li>
+</ul>
+<p>The increase in biomass imports appears to be related to the high proportion of heating networks, which partially rely on biomass as an energy source.</p>
+<p><img alt="ETM visualization of heat network energy sources showing significant biomass contribution" src="_images/etm_heat_network.png" /></p>
+<p>To analyze the impact on the electricity network:</p>
+<ol class="arabic simple">
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">See</span> <span class="pre">more</span> <span class="pre">charts</span></code> button in the top-right corner</p></li>
+<li><p>Search for <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">network</span> <span class="pre">capacity</span> <span class="pre">and</span> <span class="pre">peaks</span></code></p></li>
+<li><p>Add the chart and use the lock icon to keep it visible</p></li>
+<li><p>The network capacity table should now appear in your chart section</p></li>
+</ol>
+<p>From this we observe that the required additional network capacity at the MV net level is estimated at 29.6 GW.</p>
+<p><img alt="ETM with the network table shown" src="_images/etm_spaceheating_add_network_table.png" /></p>
+<section id="testing-extreme-heating-scenarios">
+<h3>Testing extreme heating scenarios<a class="headerlink" href="#testing-extreme-heating-scenarios" title="Link to this heading">#</a></h3>
+<section id="scenario-1-100-air-heat-pumps">
+<h4>Scenario 1: 100% air heat pumps<a class="headerlink" href="#scenario-1-100-air-heat-pumps" title="Link to this heading">#</a></h4>
+<p>The base scenario already includes a substantial share of air-based heat pumps. Alternative technologies like hybrid heat pumps and district heating networks typically create lower network peaks due to their respective capability to switch fuels or buffer energy. Let’s examine the impact of switching to 100% air heat pumps.</p>
+<p>When setting the air heat pump slider to 100%, we observe a moderate increase in network capacity requirements of approximately 1 GW.</p>
+<p><img alt="ETM interface showing settings and impacts of 100% air heat pump scenario" src="_images/etm_spaceheating_airheatpump.png" /></p>
+<p>Key observations from this change:</p>
+<ul class="simple">
+<li><p>Overall energy consumption decreases due to the energy efficiency of heat pumps</p></li>
+<li><p>System costs reduce (primarily due to removing costly district heating infrastructure)</p></li>
+<li><p>Black-out hours increase from 0 to 5 hours annually, suggesting emerging grid stress</p></li>
+<li><p>Network impact remains relatively manageable</p></li>
+</ul>
+</section>
+<section id="scenario-2-100-electric-boilers">
+<h4>Scenario 2: 100% electric boilers<a class="headerlink" href="#scenario-2-100-electric-boilers" title="Link to this heading">#</a></h4>
+<p>Taking our analysis to an extreme, let’s examine a scenario with 100% electric boilers. This represents a deliberately inefficient choice, as electric boilers have a Coefficient of Performance (COP) of 1, compared to heat pumps’ COP of 3.5 or higher. This means electric boilers require 3.5 times more electricity to produce the same heat output.</p>
+<p><img alt="ETM interface showing impacts of 100% electric boiler scenario" src="_images/etm_spaceheating_electricboiler.png" /></p>
+<p>The results clearly demonstrate why this would be problematic:</p>
+<ul class="simple">
+<li><p>Network capacity requirements increase by nearly 6 GW at the medium-voltage level compared to the base scenario</p></li>
+<li><p>Black-out hours surge to 178 hours per year, indicating severe grid stability issues</p></li>
+<li><p>The electrical system cannot adequately support this level of inefficient demand</p></li>
+</ul>
+<p>This extreme scenario effectively illustrates why efficiency matters in heating technology selection and its direct impact on grid infrastructure requirements.</p>
+<p>Reset your changes.</p>
+<div class="tip admonition">
+<p class="admonition-title">Reset your scenario</p>
+<p>You can always reset your settings back to the base scenario by clicking the <code class="docutils literal notranslate"><span class="pre">reset</span></code> button, found left of the slider elements you’ve changed. Or reopen the <a class="reference external" href="https://energytransitionmodel.com/saved_scenarios/14552">Decentral Incentives</a> scenario to reset all your changes.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="modifying-transport-parameters">
+<h2>Modifying Transport Parameters<a class="headerlink" href="#modifying-transport-parameters" title="Link to this heading">#</a></h2>
+<section id="smart-charging-for-electric-vehicles">
+<h3>Smart Charging for Electric Vehicles<a class="headerlink" href="#smart-charging-for-electric-vehicles" title="Link to this heading">#</a></h3>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Demand</span> <span class="pre">&gt;</span> <span class="pre">Transport</span> <span class="pre">passenger</span> <span class="pre">transport</span> <span class="pre">&gt;</span> <span class="pre">Car</span> <span class="pre">technology</span></code> to verify that all personal transport is electric. Then proceed to <code class="docutils literal notranslate"><span class="pre">Flexibility</span> <span class="pre">&gt;</span> <span class="pre">Flexibility</span> <span class="pre">storage</span> <span class="pre">&gt;</span> <span class="pre">Batteries</span> <span class="pre">in</span> <span class="pre">electric</span> <span class="pre">vehicles</span></code> to examine charging behavior.</p>
+<p><img alt="Initial EV charging behavior showing daily cycles" src="_images/etm_evcharging_before.png" /></p>
+<p>Increase the “Deployable capacity” slider under Technical specifications to 80% to simulate more EVs participating in smart charging strategies.</p>
+<p><img alt="Modified EV charging behavior showing weekly cycles" src="_images/etm_evcharging_after.png" /></p>
+<p>This modification produces several significant changes:</p>
+<ul class="simple">
+<li><p>Charging patterns shift from daily to weekly cycles due to increased depth of charge</p></li>
+<li><p>EVs now function as weekly energy buffers</p></li>
+<li><p>System costs increase by 0.3 billion/year</p></li>
+<li><p>Biomass imports show an increase</p></li>
+<li><p>Overall energy imports decrease from 11.9% to 11.4%</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These changes occur because EVs now participate in energy market arbitrage, affecting the merit order and technology dispatch. The resulting load profile is substantially different due to the increased charging flexibility, which may require reconsideration of the overall energy system configuration.</p>
+</div>
+</section>
+</section>
+<section id="downloading-the-hourly-load-curves">
+<h2>Downloading the hourly load curves<a class="headerlink" href="#downloading-the-hourly-load-curves" title="Link to this heading">#</a></h2>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">export</span> <span class="pre">&gt;</span> <span class="pre">Hourly</span> <span class="pre">curves</span> <span class="pre">for</span> <span class="pre">electricity</span></code>. Click the ‘Electricity load curves’ button with the CSV icon to download the data.</p>
+<p><img alt="ETM interface showing the download location for hourly electricity curves" src="_images/etm_download_curves.png" /></p>
+<p>These demand curves will serve as input for our optimization model, creating a soft coupling between our model and the ETM. By using these curves, we effectively treat demand modeling as an exogenous component of our optimization model.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>In this tutorial, we explored how different technological choices in household heating and transport can significantly impact the energy system. Through our scenario analysis in the ETM, we observed that:</p>
+<ul class="simple">
+<li><p>Technology efficiency matters greatly: The comparison between heat pumps (COP &gt; 3.5) and electric boilers (COP = 1) demonstrated how efficiency directly affects grid capacity requirements and system stability</p></li>
+<li><p>System interactions are complex: Changes in one sector (like EV charging strategies) can have unexpected effects across the system, influencing everything from biomass imports to overall system costs</p></li>
+<li><p>Grid impacts vary: While some changes (like 100% air heat pumps) led to manageable grid impacts, others (like 100% electric boilers) resulted in severe stability issues</p></li>
+</ul>
+<p>These insights highlight why detailed scenario analysis is crucial for energy system planning and why real-world decisions require careful consideration of multiple factors beyond simple technology substitution.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -376,7 +580,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1 exercises: Data analysis</p>
+        <p class="prev-next-title">Exercises 1: Data analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -384,7 +588,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2 exercises: Scenario modelling</p>
+        <p class="prev-next-title">Exercises 2: Scenario modelling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -394,6 +598,44 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-and-background">Context and background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-scenario">Starting the scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-etm-interface">Overview of the ETM interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sidebar-navigation">1. Sidebar navigation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-display">2. Chart display</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboard-overview">3. Dashboard overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-household-heating-parameters">Modifying household heating parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-extreme-heating-scenarios">Testing extreme heating scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-100-air-heat-pumps">Scenario 1: 100% air heat pumps</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-100-electric-boilers">Scenario 2: 100% electric boilers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-transport-parameters">Modifying Transport Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smart-charging-for-electric-vehicles">Smart Charging for Electric Vehicles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-hourly-load-curves">Downloading the hourly load curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -1,1 +1,1 @@
-# 2 exercises: Scenario modelling
+# Exercises 2: Scenario modelling
