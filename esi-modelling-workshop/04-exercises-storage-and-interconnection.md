@@ -1,1 +1,0 @@
-# 4 exercises: Storage, dispatchable generation and interconnection
