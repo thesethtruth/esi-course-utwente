@@ -1,1 +1,1 @@
-# 3 exercises: Capacity expansion
+# Exercises 3: Capacity expansion
