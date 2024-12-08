@@ -3,3 +3,5 @@ solar,350,0.5,
 wind,1200,3,
 battery inverter,350,,0.95
 battery storage,260,,
+flow battery power,750,,0.75
+flow battery energy,25,,
