@@ -60,11 +60,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1 tutorial: energy data analysis" href="01-tutorial-data-analysis.html" />
+    <link rel="next" title="1 tutorial: Energy data analysis" href="01-tutorial-data-analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -171,14 +173,15 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-tutorial-data-analysis.html">1 tutorial: energy data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">1 exercises: data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">2 tutorial: scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">2 exercises: scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-tutorial-data-analysis.html">1 tutorial: Energy data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">1 exercises: Data analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">2 tutorial: Scenario modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">2 exercises: Scenario modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">3 tutorial: Capacity expansion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">3 exercises: capacity expansion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-tutorial-storage-and-interconnection.html">4 tutorial: Storage and interconnection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-exercises-storage-and-interconnection.html">4 exercises: storage and interconnection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">3 exercises: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tutorial-storage-and-interconnection.html">4 tutorial: Storage, dispatchable generation and interconnection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-exercises-storage-and-interconnection.html">4 exercises: Storage, dispatchable generation and interconnection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 
     </div>
@@ -334,7 +337,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-of-this-workshop">Content of this workshop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-sources">Useful sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-guide-energy-system-integration">Installation Guide: Energy System Integration</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-poetry">Explainer: Why Python, VSCode, and Poetry?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
@@ -383,7 +394,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="welcome">
 <h1>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h1>
 <p>Welcome to the website for the energy modelling workshop of the course Energy System Integration (202400343). This course is part of the curriculum of the <a class="reference external" href="https://www.utwente.nl/en/set/">Sustainable Energy Technology master at the University of Twente</a>.</p>
-<p>This workshop covers an introduction to energy system modelling in the context of Energy System Integration. It is based around an optimisation approach using PyPSA. Topics covered in this tutorial:</p>
+<p>This workshop is an introduction to energy system modelling in the context of Energy System Integration. It is based around an optimisation approach using PyPSA. Topics covered in this tutorial:</p>
 <ul class="simple">
 <li><p>time series analysis (e.g. wind and solar production, load curves)</p></li>
 <li><p>geographical data (e.g. location of power plants)</p></li>
@@ -394,6 +405,38 @@
 <li><p>multi-nodal networks</p></li>
 <li><p>interactive visualisation and dashboarding</p></li>
 </ul>
+<section id="content-of-this-workshop">
+<h2>Content of this workshop<a class="headerlink" href="#content-of-this-workshop" title="Link to this heading">#</a></h2>
+<p>This workshop is organized into four chapters, each designed to deepen your understanding of the topics through a combination of tutorials and exercises.</p>
+<ol class="arabic simple">
+<li><p><strong>Tutorials</strong>: Each chapter includes a detailed tutorial that guides you step-by-step through the topic. The tutorials are centered around practical code examples, with explanations in-between to help you understand the underlying concepts.</p></li>
+<li><p><strong>Exercises</strong>: At the end of each chapter, you’ll find exercises to work through. These exercises are intended to reinforce your learning and give you an opportunity to apply the concepts on your own. As you tackle the exercises, feel free to refer back to the tutorial and relevant <a class="reference internal" href="#useful-sources"><span class="xref myst">documentation</span></a> for support.</p></li>
+</ol>
+<p>Happy learning!</p>
+</section>
+<section id="useful-sources">
+<h2>Useful sources<a class="headerlink" href="#useful-sources" title="Link to this heading">#</a></h2>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypsa.readthedocs.io/en/latest/index.html">PyPSA documentation</a></p></li>
+<li><p><a class="reference external" href="https://pypsa.readthedocs.io/en/latest/examples-index/lopf.html">PyPSA examples</a></p></li>
+<li><p><a class="reference external" href="https://seaborn.pydata.org/index.html">seaborn</a></p></li>
+<li><p><a class="reference external" href="https://pandas.pydata.org/docs/">Pandas</a></p></li>
+</ul>
+</section>
+<section id="data-sources">
+<h3>Data sources<a class="headerlink" href="#data-sources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://renewables.ninja/">Renewables.ninja</a><br />
+<em>(renewable energy generation timeseries)</em></p></li>
+<li><p><a class="reference external" href="https://energytransitionmodel.com/">Energy Transition Model</a><br />
+<em>(scenario modelling, demand curves, rich data source)</em></p></li>
+<li><p><a class="reference external" href="https://github.com/PyPSA/technology-data/tree/master/outputs">Technology data</a><br />
+<em>(costs, emission factors, efficiencies, etc.)</em></p></li>
+</ul>
+</section>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="installation-guide-energy-system-integration">
 <h1>Installation Guide: Energy System Integration<a class="headerlink" href="#installation-guide-energy-system-integration" title="Link to this heading">#</a></h1>
@@ -573,7 +616,7 @@ poetry<span class="w"> </span>install
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1 tutorial: energy data analysis</p>
+        <p class="prev-next-title">1 tutorial: Energy data analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -594,7 +637,15 @@ poetry<span class="w"> </span>install
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-of-this-workshop">Content of this workshop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-sources">Useful sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-guide-energy-system-integration">Installation Guide: Energy System Integration</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-poetry">Explainer: Why Python, VSCode, and Poetry?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>

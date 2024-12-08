@@ -1,1 +1,1 @@
-# 1 exercises: data analysis
+# 1 exercises: Data analysis
