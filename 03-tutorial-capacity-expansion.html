@@ -340,7 +340,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -356,6 +358,47 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-load-data-processing">Step 1: Load data processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-combining-timeseries-data">Step 2: Combining timeseries data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-creation-and-optimization">Network creation and optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-scenario-analysis">Baseline scenario analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-system-configuration">Plot the energy system configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-with-renewable-generation-limits">Baseline with renewable generation limits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Plot the energy system configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-generation-capacity-limits">Impact of generation capacity limits</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-with-renewable-generation-limits-and-flow-battery-scenario">Baseline with renewable generation limits and flow battery scenario</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the energy system configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-adding-long-duration-energy-storage">Impact of adding long-duration energy storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-scenarios-and-run-the-optimisation-problems">Define scenarios and run the optimisation problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-and-visualization">Results Analysis and Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis-results">Sensitivity analysis results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -367,6 +410,979 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tutorial-3-capacity-expansion">
 <h1>Tutorial 3: Capacity expansion<a class="headerlink" href="#tutorial-3-capacity-expansion" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>This tutorial demonstrates how to perform capacity expansion modeling using PyPSA (Python for Power System Analysis). We’ll build a simple power system model that optimizes the deployment of renewable energy sources (wind and solar) along with storage capacity to meet electricity demand at minimum cost.</p>
+</section>
+<section id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>First, we need to prepare our input data. We’ll process load data and renewable generation profiles.</p>
+<section id="step-1-load-data-processing">
+<h3>Step 1: Load data processing<a class="headerlink" href="#step-1-load-data-processing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># imports and settings for the plotting</span>
+<span class="kn">from</span> <span class="nn">pypsa</span> <span class="kn">import</span> <span class="n">Network</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="s2">&quot;notebook&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes.spines&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data</span>
+<span class="n">RAW_FILE</span> <span class="o">=</span> <span class="s2">&quot;data/merit_order.csv&quot;</span>
+<span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;data/load.csv&quot;</span>
+<span class="n">NORMALIZE</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">RESET_INDEX_YEAR</span> <span class="o">=</span> <span class="mi">2019</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAW_FILE</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;.input&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">NORMALIZE</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">/</span> <span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">RESET_INDEX_YEAR</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
+        <span class="n">start</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">RESET_INDEX_YEAR</span><span class="si">}</span><span class="s2">-01-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-combining-timeseries-data">
+<h3>Step 2: Combining timeseries data<a class="headerlink" href="#step-2-combining-timeseries-data" title="Link to this heading">#</a></h3>
+<p>We combine the timeseries to an uniform data format for ease of use in our optimisation model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data files</span>
+
+<span class="n">LOAD_FP</span> <span class="o">=</span> <span class="s2">&quot;data/load.csv&quot;</span>
+<span class="n">SOLAR_FP</span> <span class="o">=</span> <span class="s2">&quot;data/solar.csv&quot;</span>
+<span class="n">WIND_FP</span> <span class="o">=</span> <span class="s2">&quot;data/wind.csv&quot;</span>
+
+
+<span class="n">load_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">LOAD_FP</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">solar_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SOLAR_FP</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">wind_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">WIND_FP</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Combine based on load timestamps</span>
+<span class="n">combined_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">load_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">combined_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="n">combined_data</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span>
+<span class="n">combined_data</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_data</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">combined_data</span><span class="p">[</span><span class="s2">&quot;wind&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wind_data</span><span class="p">[</span><span class="s2">&quot;electricity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Save the combined timeseries</span>
+<span class="n">combined_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data/timeseries.csv&quot;</span><span class="p">)</span>
+
+<span class="n">ts</span> <span class="o">=</span> <span class="n">combined_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="network-creation-and-optimization">
+<h2>Network creation and optimization<a class="headerlink" href="#network-creation-and-optimization" title="Link to this heading">#</a></h2>
+<p>Now we’ll create our network model. We’ll analyze three different scenarios with varying cost ratios between generation and storage. We will first define some functions that reuse.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_network</span><span class="p">(</span>
+    <span class="n">ts</span><span class="p">,</span>
+    <span class="n">costs</span><span class="p">,</span>
+    <span class="n">generation_cost_multiplier</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">storage_cost_multiplier</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">add_flow_battery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">limit_renewable_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Network</span><span class="p">:</span>
+
+    <span class="c1"># Adjust costs based on multipliers</span>
+    <span class="n">costs</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;wind&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">],</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">generation_cost_multiplier</span>
+    <span class="n">costs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;battery storage&quot;</span><span class="p">],</span> <span class="s2">&quot;capital_cost&quot;</span>
+    <span class="p">]</span> <span class="o">*=</span> <span class="n">storage_cost_multiplier</span>
+
+    <span class="c1"># initialize network</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">Network</span><span class="p">()</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;electricity&quot;</span><span class="p">)</span>
+
+    <span class="c1"># add load</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;demand&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">p_set</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">load</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># add solar and wind</span>
+    <span class="n">tech_limits</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;wind&quot;</span><span class="p">:</span> <span class="mf">150e3</span><span class="p">,</span>
+        <span class="s2">&quot;solar&quot;</span><span class="p">:</span> <span class="mf">300e3</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">tech</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;wind&quot;</span><span class="p">,</span> <span class="s2">&quot;solar&quot;</span><span class="p">]:</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+            <span class="n">tech</span><span class="p">,</span>
+            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+            <span class="n">p_max_pu</span><span class="o">=</span><span class="n">ts</span><span class="p">[</span><span class="n">tech</span><span class="p">],</span>
+            <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">tech</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+            <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">tech</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+            <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">p_nom_max</span><span class="o">=</span><span class="n">tech_limits</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span> <span class="k">if</span> <span class="n">limit_renewable_energy</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># add short-duration battery storage</span>
+    <span class="n">EP_RATIO</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">max_hours</span><span class="o">=</span><span class="n">EP_RATIO</span><span class="p">,</span>
+        <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">EP_RATIO</span> <span class="o">*</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery storage&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+        <span class="n">efficiency_store</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">efficiency_dispatch</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">cyclic_state_of_charge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">add_flow_battery</span><span class="p">:</span>
+        <span class="c1"># add long-duration flow battery</span>
+        <span class="n">FLOW_EP_RATIO</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flow battery&quot;</span><span class="p">,</span>
+            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+            <span class="n">max_hours</span><span class="o">=</span><span class="n">FLOW_EP_RATIO</span><span class="p">,</span>
+            <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;flow battery power&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span>
+            <span class="o">+</span> <span class="n">FLOW_EP_RATIO</span> <span class="o">*</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;flow battery energy&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+            <span class="n">efficiency_store</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;flow battery power&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+            <span class="n">efficiency_dispatch</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;flow battery power&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+            <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">cyclic_state_of_charge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="baseline-scenario-analysis">
+<h3>Baseline scenario analysis<a class="headerlink" href="#baseline-scenario-analysis" title="Link to this heading">#</a></h3>
+<p>For the baseline scenario, we assume only lithium ion batteries to be available.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the cost data</span>
+<span class="n">COSTS_FP</span> <span class="o">=</span> <span class="s2">&quot;data/costs.csv&quot;</span>
+<span class="n">SOLVER_OPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;primal_feasibility_tolerance&quot;</span><span class="p">:</span> <span class="mf">1e-5</span><span class="p">,</span>
+    <span class="s2">&quot;dual_feasibility_tolerance&quot;</span><span class="p">:</span> <span class="mf">1e-5</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1"># we decrease the tolerance to speed up the optimization (default is 1e-7)</span>
+
+<span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COSTS_FP</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">costs</span><span class="p">,</span> <span class="n">add_flow_battery</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">,</span>
+    <span class="n">solver_options</span><span class="o">=</span><span class="n">SOLVER_OPTIONS</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/pypsa/io.py:1096: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option(&#39;future.no_silent_downcasting&#39;, True)`
+  df = df.fillna(attrs[&quot;default&quot;].to_dict())
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/pypsa/io.py:1096: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option(&#39;future.no_silent_downcasting&#39;, True)`
+  df = df.fillna(attrs[&quot;default&quot;].to_dict())
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 41.10it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 88.39it/s]
+INFO:linopy.io: Writing time: 0.49s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 6e+00]
+  Cost   [5e-01, 2e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 1e+05]
+Presolving model
+56913 rows, 39396 cols, 144459 nonzeros  0s
+56913 rows, 39396 cols, 144459 nonzeros  0s
+Presolve : Reductions: rows 56913(-48210); columns 39396(-4407); elements 144459(-52617)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(2.88434e+08) 0s
+      20220     8.4002676480e+08 Pr: 13419(2.8302e+11); Du: 0(0.000685162) 6s
+      36450     1.2025215527e+09 Pr: 0(0); Du: 0(1.21225e-12) 10s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-mrkpyvip
+Model status        : Optimal
+Simplex   iterations: 36450
+Objective value     :  1.2025215527e+09
+Relative P-D gap    :  2.7757174913e-15
+HiGHS run time      :         10.14
+Writing the solution to /tmp/linopy-solve-ikm19emw.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 43803 primals, 105123 duals
+Objective: 1.20e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="plot-the-energy-system-configuration">
+<h4>Plot the energy system configuration<a class="headerlink" href="#plot-the-energy-system-configuration" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">capacity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">]</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Installed Capacities: Baseline scenario&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Capacity (GW)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Capacity (GW)&#39;)
+</pre></div>
+</div>
+<img alt="_images/1574a3a3ed7fed7c6feafeb1e53379af597112dfc9aa75106ddba4f1ba5ba789.png" src="_images/1574a3a3ed7fed7c6feafeb1e53379af597112dfc9aa75106ddba4f1ba5ba789.png" />
+</div>
+</div>
+<p>The baseline scenario shows very large capacities;</p>
+<ul class="simple">
+<li><p>500 GW solar</p></li>
+<li><p>230 GW wind</p></li>
+<li><p>and 130 GW storage</p></li>
+</ul>
+<p>These values exceed what could physically fit in the Netherlands. This oversizing occurs because our model treats the Netherlands as an isolated system without connections to neighboring countries, requiring full self-sufficiency in power generation.</p>
+</section>
+</section>
+<section id="baseline-with-renewable-generation-limits">
+<h3>Baseline with renewable generation limits<a class="headerlink" href="#baseline-with-renewable-generation-limits" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">costs</span><span class="p">,</span> <span class="n">add_flow_battery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">limit_renewable_energy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">,</span>
+    <span class="n">solver_options</span><span class="o">=</span><span class="n">SOLVER_OPTIONS</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 40.93it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 65.59it/s]
+INFO:linopy.io: Writing time: 0.51s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 6e+00]
+  Cost   [5e-01, 2e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+56913 rows, 39396 cols, 144459 nonzeros  0s
+56913 rows, 39396 cols, 144459 nonzeros  0s
+Presolve : Reductions: rows 56913(-48212); columns 39396(-4407); elements 144459(-52619)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(2.88434e+08) 0s
+       9002     2.2174740770e+08 Pr: 11220(4.14063e+10); Du: 0(0.000391046) 7s
+      39571     1.7644238200e+09 Pr: 0(0); Du: 0(6.7335e-13) 10s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-6ce4rl96
+Model status        : Optimal
+Simplex   iterations: 39571
+Objective value     :  1.7644238200e+09
+Relative P-D gap    :  2.9051973753e-14
+HiGHS run time      :         10.36
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 43803 primals, 105125 duals
+Objective: 1.76e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-ull82aq8.sol
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="id1">
+<h4>Plot the energy system configuration<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">capacity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">]</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Installed Capacities: Baseline with limited renewable energy&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Capacity (GW)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Capacity (GW)&#39;)
+</pre></div>
+</div>
+<img alt="_images/dc5148284125c7027c46172d81070d5135b3198f13ceb95b8fe058824b535a81.png" src="_images/dc5148284125c7027c46172d81070d5135b3198f13ceb95b8fe058824b535a81.png" />
+</div>
+</div>
+</section>
+<section id="impact-of-generation-capacity-limits">
+<h4>Impact of generation capacity limits<a class="headerlink" href="#impact-of-generation-capacity-limits" title="Link to this heading">#</a></h4>
+<p>With upper limits applied to renewable generation, we see:</p>
+<ul class="simple">
+<li><p>300 GW solar (at limit)</p></li>
+<li><p>150 GW (at limit)</p></li>
+<li><p>480 GW lithium-ion battery storage</p></li>
+</ul>
+<p>The model responds to these generation constraints by heavily investing in storage capacity. This shift reveals a key system dynamic: when prevented from oversizing generation, the model compensates with massive storage deployment. However, with lithium-ion batteries limited to 6 hours of storage duration, this solution may struggle to bridge extended periods of low renewable generation, suggesting the need for longer-duration storage technologies.</p>
+</section>
+</section>
+<section id="baseline-with-renewable-generation-limits-and-flow-battery-scenario">
+<h3>Baseline with renewable generation limits and flow battery scenario<a class="headerlink" href="#baseline-with-renewable-generation-limits-and-flow-battery-scenario" title="Link to this heading">#</a></h3>
+<p>In this scenario, in addition to the upper limit imposed on renewable energy generation we also assume also flow batteries are available for energy storage.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">costs</span><span class="p">,</span> <span class="n">add_flow_battery</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit_renewable_energy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">,</span>
+    <span class="n">solver_options</span><span class="o">=</span><span class="n">SOLVER_OPTIONS</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 27.29it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 64.36it/s]
+INFO:linopy.io: Writing time: 0.71s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 1e+02]
+  Cost   [5e-01, 3e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+91953 rows, 65677 cols, 249579 nonzeros  0s
+91953 rows, 65677 cols, 249579 nonzeros  0s
+Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
+      12160     1.8623553094e+08 Pr: 14874(3.04767e+10); Du: 0(0.00164249) 6s
+      18075     1.8738298523e+08 Pr: 17422(9.16745e+10); Du: 0(0.00227149) 11s
+      23161     1.8881790897e+08 Pr: 19606(1.58739e+11); Du: 0(0.00280235) 17s
+      27088     1.8986007861e+08 Pr: 21214(2.07089e+11); Du: 0(0.00374331) 23s
+      28739     3.1744926814e+08 Pr: 21302(2.66921e+11); Du: 0(0.00379979) 29s
+      31281     3.6779305938e+08 Pr: 21078(7.42084e+10); Du: 0(0.00353308) 34s
+      34243     5.8487688436e+08 Pr: 37451(9.3575e+11); Du: 0(0.00281197) 39s
+      38652     6.3551931227e+08 Pr: 17331(1.10048e+11); Du: 0(0.00264149) 45s
+      44248     8.2510192110e+08 Pr: 17787(1.64779e+10); Du: 0(0.00397365) 51s
+      49751     1.0131698839e+09 Pr: 32853(5.91491e+09); Du: 0(0.00406809) 56s
+      62089     1.1546633084e+09 Pr: 34242(1.09336e+10); Du: 0(0.0035182) 64s
+      76312     1.1844667613e+09 Pr: 0(0); Du: 0(7.02838e-12) 68s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-vq1nshyf
+Model status        : Optimal
+Simplex   iterations: 76312
+Objective value     :  1.1844667613e+09
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 70084 primals, 166446 duals
+Objective: 1.18e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative P-D gap    :  7.4476445564e-15
+HiGHS run time      :         68.54
+Writing the solution to /tmp/linopy-solve-jdtj8wnz.sol
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="id2">
+<h4>Plot the energy system configuration<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">capacity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;storage&quot;</span><span class="p">]</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Installed Capacities: Baseline with LDES and limited renewable energy&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Capacity (GW)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Capacity (GW)&#39;)
+</pre></div>
+</div>
+<img alt="_images/e73de76336a07e21e709d73b80bd8264aa5603c031a69d922ad12b05de9276cd.png" src="_images/e73de76336a07e21e709d73b80bd8264aa5603c031a69d922ad12b05de9276cd.png" />
+</div>
+</div>
+</section>
+<section id="impact-of-adding-long-duration-energy-storage">
+<h4>Impact of adding long-duration energy storage<a class="headerlink" href="#impact-of-adding-long-duration-energy-storage" title="Link to this heading">#</a></h4>
+<p>After adding flow batteries (100-hour storage duration), the model selects:</p>
+<ul class="simple">
+<li><p>300 GW solar (at limit)</p></li>
+<li><p>150 GW wind (at limit)</p></li>
+<li><p>80 GW battery electric storage</p></li>
+<li><p>40 GW flow battery storage</p></li>
+</ul>
+<p>The introduction of long-duration energy storage (LDES) reduces the need for short-duration batteries by about 80%. The model opts for a mix of both storage types, using flow batteries to manage multi-day supply gaps while keeping some battery capacity for daily cycling. This more diversified storage portfolio better matches the temporal patterns of renewable generation.</p>
+</section>
+</section>
+</section>
+<section id="sensitivity-analysis">
+<h2>Sensitivity analysis<a class="headerlink" href="#sensitivity-analysis" title="Link to this heading">#</a></h2>
+<section id="define-scenarios-and-run-the-optimisation-problems">
+<h3>Define scenarios and run the optimisation problems<a class="headerlink" href="#define-scenarios-and-run-the-optimisation-problems" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and solve networks with different cost scenarios</span>
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="s2">&quot;expensive_generation&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="s2">&quot;expensive_storage&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">gen_mult</span><span class="p">,</span> <span class="n">store_mult</span><span class="p">)</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span>
+        <span class="n">ts</span><span class="p">,</span>
+        <span class="n">costs</span><span class="p">,</span>
+        <span class="n">gen_mult</span><span class="p">,</span>
+        <span class="n">store_mult</span><span class="p">,</span>
+        <span class="n">add_flow_battery</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">limit_renewable_energy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="n">SOLVER_OPTIONS</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 26.99it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 62.47it/s]
+INFO:linopy.io: Writing time: 0.71s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 1e+02]
+  Cost   [5e-01, 3e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+91953 rows, 65677 cols, 249579 nonzeros  0s
+91953 rows, 65677 cols, 249579 nonzeros  0s
+Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
+      10829     2.0078874152e+08 Pr: 14636(2.96392e+10); Du: 0(4.13542e-07) 6s
+      16531     2.0202901339e+08 Pr: 17102(8.63049e+10); Du: 0(4.61548e-07) 12s
+      20973     2.0332679358e+08 Pr: 18945(1.47268e+11); Du: 0(4.98494e-07) 18s
+      23935     2.0449526677e+08 Pr: 20233(2.00132e+11); Du: 0(5.80821e-07) 26s
+      26806     3.6180356239e+08 Pr: 20026(6.98268e+10); Du: 0(5.13956e-07) 32s
+      30325     6.4114009675e+08 Pr: 35096(1.5566e+10); Du: 0(3.93349e-07) 40s
+      35580     6.7169789358e+08 Pr: 35427(2.18765e+10); Du: 0(4.77831e-07) 48s
+      39384     7.1641617885e+08 Pr: 35866(3.28844e+10); Du: 0(4.86904e-07) 54s
+      42281     8.9458150482e+08 Pr: 19891(2.57291e+11); Du: 0(4.18734e-07) 62s
+      46595     9.4420597206e+08 Pr: 34229(7.05994e+10); Du: 0(3.37482e-07) 68s
+      51861     1.2338467876e+09 Pr: 37939(3.15752e+10); Du: 0(5.23816e-07) 73s
+      57777     1.3279369313e+09 Pr: 5751(3.15662e+08); Du: 0(3.45493e-07) 79s
+      62929     1.3801491707e+09 Pr: 1067(9.37847e+06); Du: 0(6.80266e-07) 85s
+      64049     1.3819258190e+09 Pr: 0(0); Du: 0(7.60392e-13) 86s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-jze6jmhm
+Model status        : Optimal
+Simplex   iterations: 64049
+Objective value     :  1.3819258190e+09
+Relative P-D gap    :  7.5911581765e-15
+HiGHS run time      :         85.93
+Writing the solution to /tmp/linopy-solve-83lipf3u.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 70084 primals, 166446 duals
+Objective: 1.38e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 28.14it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 64.64it/s]
+INFO:linopy.io: Writing time: 0.69s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 1e+02]
+  Cost   [5e-01, 4e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+91953 rows, 65677 cols, 249579 nonzeros  0s
+91953 rows, 65677 cols, 249579 nonzeros  0s
+Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
+       8252     2.0049896311e+08 Pr: 13451(1.22835e+10); Du: 0(4.37567e-07) 7s
+      14345     2.0176564085e+08 Pr: 16114(6.23753e+10); Du: 0(6.55286e-07) 12s
+      19348     2.0316815075e+08 Pr: 18332(1.16312e+11); Du: 0(7.37611e-07) 17s
+      22671     2.0435855010e+08 Pr: 19794(1.58931e+11); Du: 0(6.86099e-07) 23s
+      26180     3.6144549772e+08 Pr: 19491(4.88207e+10); Du: 0(6.3827e-07) 29s
+      29998     7.5960989954e+08 Pr: 34110(5.10856e+10); Du: 0(4.32111e-07) 36s
+      34831     7.6058488010e+08 Pr: 35013(7.81853e+10); Du: 0(4.95672e-07) 46s
+      37769     8.1164955339e+08 Pr: 34746(6.80415e+10); Du: 0(6.22622e-07) 52s
+      40846     9.1602096039e+08 Pr: 36764(7.80199e+10); Du: 0(5.42615e-07) 58s
+      43552     1.0272633897e+09 Pr: 34329(2.00905e+10); Du: 0(5.77779e-07) 63s
+      46282     1.1472580456e+09 Pr: 36620(4.55435e+10); Du: 0(4.7278e-07) 68s
+      50757     1.4714910177e+09 Pr: 17105(4.18418e+09); Du: 0(5.22039e-07) 78s
+      56224     1.6735926435e+09 Pr: 34949(1.30341e+10); Du: 0(8.16692e-07) 83s
+      60304     1.7507146331e+09 Pr: 8764(4.50142e+09); Du: 0(3.73758e-07) 88s
+      65319     1.7948140475e+09 Pr: 4630(2.43666e+09); Du: 0(5.59382e-07) 94s
+      67251     1.8004621056e+09 Pr: 0(0); Du: 0(3.88698e-11) 96s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-eca0dp_2
+Model status        : Optimal
+Simplex   iterations: 67251
+Objective value     :  1.8004621056e+09
+Relative P-D gap    :  5.0319892753e-15
+HiGHS run time      :         96.15
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 70084 primals, 166446 duals
+Objective: 1.80e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-vprnh_4_.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 26.79it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 58.06it/s]
+INFO:linopy.io: Writing time: 0.72s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 1e+02]
+  Cost   [5e-01, 6e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+91953 rows, 65677 cols, 249579 nonzeros  0s
+91953 rows, 65677 cols, 249579 nonzeros  0s
+Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
+      12454     2.0499658269e+08 Pr: 13011(6.39438e+10); Du: 0(1.02538e-07) 6s
+      17279     2.0729501908e+08 Pr: 14535(1.45605e+11); Du: 0(1.02538e-07) 14s
+      21567     2.1010135268e+08 Pr: 15813(2.43517e+11); Du: 0(1.02538e-07) 19s
+      25336     2.1315855408e+08 Pr: 16892(3.54561e+11); Du: 0(3.21475e-08) 24s
+      28179     3.4514256131e+08 Pr: 24665(2.16081e+10) 30s
+      32518     4.3559447277e+08 Pr: 36333(1.14716e+11); Du: 0(2.35122e-08) 36s
+      34693     4.6797538880e+08 Pr: 36729(1.36514e+11); Du: 0(2.35122e-08) 42s
+      36537     6.8420417873e+08 Pr: 23042(6.13188e+10); Du: 0(9.42753e-08) 49s
+      40328     7.9648449275e+08 Pr: 23182(3.10041e+10); Du: 0(9.00538e-08) 57s
+      44183     1.2889162547e+09 Pr: 45155(9.51759e+10); Du: 0(9.00538e-08) 65s
+      46406     1.3531102613e+09 Pr: 36625(7.10541e+10); Du: 0(9.00538e-08) 71s
+      48997     1.5005185598e+09 Pr: 19003(1.39307e+10); Du: 0(1.35252e-07) 80s
+      50011     1.5215846861e+09 Pr: 19711(7.59233e+10); Du: 0(1.35252e-07) 85s
+      52879     1.5463869441e+09 Pr: 19064(9.28211e+09); Du: 0(1.35252e-07) 91s
+      56274     1.5726580497e+09 Pr: 36614(1.12314e+10); Du: 0(1.35252e-07) 97s
+      59493     1.6195562584e+09 Pr: 39027(1.89399e+11); Du: 0(1.88387e-07) 102s
+      63551     1.6769157089e+09 Pr: 30616(1.12499e+09); Du: 0(8.83848e-08) 109s
+      66943     1.8033264811e+09 Pr: 34773(7.99679e+09); Du: 0(3.98244e-07) 115s
+      68103     1.8100493214e+09 Pr: 6895(6.75874e+08); Du: 0(3.60333e-07) 120s
+      72530     1.8501027988e+09 Pr: 29960(4.6737e+08); Du: 0(3.25928e-07) 126s
+      75575     1.8573619073e+09 Pr: 0(0); Du: 0(1.61045e-07) 131s
+      75575     1.8571737608e+09 Pr: 0(0) 131s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-mucdulra
+Model status        : Optimal
+Simplex   iterations: 75575
+Objective value     :  1.8571737608e+09
+Relative P-D gap    :  4.3648213540e-15
+HiGHS run time      :        131.32
+Writing the solution to /tmp/linopy-solve-jpoe3v_5.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 70084 primals, 166446 duals
+Objective: 1.86e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="results-analysis-and-visualization">
+<h2>Results Analysis and Visualization<a class="headerlink" href="#results-analysis-and-visualization" title="Link to this heading">#</a></h2>
+<p>Let’s analyze and compare the results from our different scenarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Capacity comparison</span>
+<span class="n">capacity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">scenario</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">caps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">scenario</span>
+    <span class="p">)</span>
+    <span class="n">capacity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">capacity_data</span><span class="p">,</span> <span class="n">caps</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># convert to GW</span>
+<span class="n">capacity_data</span> <span class="o">=</span> <span class="n">capacity_data</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+<span class="c1"># make scenario names pretty</span>
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">capacity_data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+<span class="n">capacity_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Installed Capacities by scenario&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Capacity (GW)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add data call outs</span>
+<span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.0f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Cost comparison</span>
+<span class="n">cost_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">n</span><span class="o">.</span><span class="n">objective</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Relative System Cost&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e9</span><span class="p">)</span>
+
+<span class="c1"># Normalize to baseline</span>
+<span class="n">cost_data</span> <span class="o">=</span> <span class="n">cost_data</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">cost_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># make index pretty</span>
+<span class="n">cost_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">cost_data</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+<span class="n">cost_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Relative system cost by scenario&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Relative cost (%)&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b83237a9efdf3bfcbf65cb2e3eea5c7561412585d5af939e51c3f5a091aea015.png" src="_images/b83237a9efdf3bfcbf65cb2e3eea5c7561412585d5af939e51c3f5a091aea015.png" />
+</div>
+</div>
+<section id="sensitivity-analysis-results">
+<h3>Sensitivity analysis results<a class="headerlink" href="#sensitivity-analysis-results" title="Link to this heading">#</a></h3>
+<p>Comparing three cost scenarios reveals clear system adaptation patterns:</p>
+<ul class="simple">
+<li><p>In the baseline scenario (renewable and storage costs at reference values), the model deploys 150 GW wind, 300 GW solar, with a mixed storage portfolio of 51 GW batteries and 44 GW flow batteries.</p></li>
+<li><p>When <strong>generation costs double</strong>, wind capacity slightly decreases to 143 GW while solar remains at its 300 GW limit. Storage capacities remain similar (50 GW batteries, 50 GW flow), suggesting storage deployment is relatively insensitive to generation costs. Total system costs increase by 30%.</p></li>
+<li><p>With <strong>doubled storage costs</strong>, the model shifts notably. While solar remains capped and wind drops slightly to 140 GW, battery storage is completely phased out in favor of increased flow battery capacity (83 GW). This suggests flow batteries’ longer duration becomes more valuable when storage is expensive. The scenario results in the highest cost increase at 34% above baseline. Interestingly, the deployed wind capacity is more sensitive towards the costs of storage than towards the cost of generation.</p></li>
+</ul>
+</section>
+<section id="detailed-analysis-of-system-dynamics">
+<h3>Detailed analysis of system dynamics<a class="headerlink" href="#detailed-analysis-of-system-dynamics" title="Link to this heading">#</a></h3>
+<p>We might be interested in specific system dynamics of one of the scenarios during a specific week. Remember the first chapter of this tutorial? We found that February has a long period of high demand due to heating. Let’s see how each of the energy system configurations fares during this period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_timeseries</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">week_start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">week_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">week_start</span> <span class="o">*</span> <span class="mi">168</span><span class="p">,</span> <span class="p">(</span><span class="n">week_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">168</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># slice the generation data</span>
+    <span class="n">generation</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="p">[</span><span class="n">week_slice</span><span class="p">]</span> <span class="o">*</span> <span class="n">network</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="n">week_slice</span><span class="p">]</span>
+    <span class="n">load</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="n">week_slice</span><span class="p">]</span>
+
+    <span class="c1"># extract the negative and positive parts of the storage</span>
+    <span class="n">storage_negative</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">storage_negative</span><span class="p">[</span><span class="n">storage</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">storage_negative</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> (discharging)&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">storage_negative</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">]</span>
+
+    <span class="n">storage_positive</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">storage_positive</span><span class="p">[</span><span class="n">storage</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">storage_positive</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> (charging)&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">storage_positive</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+    <span class="c1"># combine the parts to positive and negative timeseries (on the bus)</span>
+    <span class="n">positives</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">generation</span><span class="p">,</span> <span class="n">storage_positive</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+    <span class="n">negatives</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="o">-</span><span class="n">load</span><span class="p">,</span> <span class="n">storage_negative</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+
+    <span class="n">curtailment</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">positives</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">negatives</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">curtailment</span><span class="p">[</span><span class="n">curtailment</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">curtailment</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;curtailment&quot;</span>
+
+    <span class="n">negatives</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">negatives</span><span class="p">,</span> <span class="n">curtailment</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Define colors for each technology</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;wind&quot;</span><span class="p">:</span> <span class="s2">&quot;#4B90B9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;solar&quot;</span><span class="p">:</span> <span class="s2">&quot;#E6B829&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;demand&quot;</span><span class="p">:</span> <span class="s2">&quot;#708090&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;battery storage (charging)&quot;</span><span class="p">:</span> <span class="s2">&quot;#9CAF88&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;battery storage (discharging)&quot;</span><span class="p">:</span> <span class="s2">&quot;#4A5D3F&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;flow battery (charging)&quot;</span><span class="p">:</span> <span class="s2">&quot;#9B8EA9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;flow battery (discharging)&quot;</span><span class="p">:</span> <span class="s2">&quot;#563D67&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;curtailment&quot;</span><span class="p">:</span> <span class="s2">&quot;#B07979&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># Apply colors to the plots</span>
+    <span class="n">positives</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;area&quot;</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s2">&quot;#333333&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">positives</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">negatives</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;area&quot;</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s2">&quot;#333333&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">negatives</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power System Operation - Week </span><span class="si">{</span><span class="n">week_start</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Power (GW)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_timeseries</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">],</span> <span class="s2">&quot;Baseline&quot;</span><span class="p">,</span> <span class="n">week_start</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_timeseries</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;expensive_generation&quot;</span><span class="p">],</span> <span class="s2">&quot;Expensive Generation&quot;</span><span class="p">,</span> <span class="n">week_start</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_timeseries</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;expensive_storage&quot;</span><span class="p">],</span> <span class="s2">&quot;Expensive Storage&quot;</span><span class="p">,</span> <span class="n">week_start</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/pandas/plotting/_matplotlib/core.py:1800: UserWarning: Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+  ax.set_ylim(None, 0)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/pandas/plotting/_matplotlib/core.py:1800: UserWarning: Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+  ax.set_ylim(None, 0)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/pandas/plotting/_matplotlib/core.py:1800: UserWarning: Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+  ax.set_ylim(None, 0)
+</pre></div>
+</div>
+<img alt="_images/470fe82dca3bb77c470e794f89c7dda0a7d6139a09d30ae0b16b9ec860ea5af2.png" src="_images/470fe82dca3bb77c470e794f89c7dda0a7d6139a09d30ae0b16b9ec860ea5af2.png" />
+<img alt="_images/919a2eaa52c7ba2f63504e322e3fab18085d463237d89f89ad01a97e350c0296.png" src="_images/919a2eaa52c7ba2f63504e322e3fab18085d463237d89f89ad01a97e350c0296.png" />
+<img alt="_images/2de87980501cb3d728ddde552deba8e4e62af936a47685b963c0df59f7ee7275.png" src="_images/2de87980501cb3d728ddde552deba8e4e62af936a47685b963c0df59f7ee7275.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>The addition of long-duration storage (flow battery) allows for better management of longer periods of low renewable generation.</p></li>
+<li><p>Different cost scenarios lead to different optimal system configurations:</p>
+<ul class="simple">
+<li><p>Higher generation costs result in more storage capacity to make better use of available renewable energy</p></li>
+<li><p>Higher storage costs push the system toward oversized generation capacity to reduce storage needs</p></li>
+</ul>
+</li>
+<li><p>The baseline scenario represents a balanced approach between generation and storage.</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>To extend this analysis, you could:</p>
+<ol class="arabic simple">
+<li><p>Add more technology options (e.g., different storage or dispatchables technologies)</p></li>
+<li><p>Analyze seasonal patterns using the full year of data</p></li>
+<li><p>Include more detailed cost components (fixed O&amp;M, variable O&amp;M, etc.)</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -423,6 +1439,55 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-load-data-processing">Step 1: Load data processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-combining-timeseries-data">Step 2: Combining timeseries data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-creation-and-optimization">Network creation and optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-scenario-analysis">Baseline scenario analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-energy-system-configuration">Plot the energy system configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-with-renewable-generation-limits">Baseline with renewable generation limits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Plot the energy system configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-generation-capacity-limits">Impact of generation capacity limits</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-with-renewable-generation-limits-and-flow-battery-scenario">Baseline with renewable generation limits and flow battery scenario</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the energy system configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-adding-long-duration-energy-storage">Impact of adding long-duration energy storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-scenarios-and-run-the-optimisation-problems">Define scenarios and run the optimisation problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-and-visualization">Results Analysis and Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis-results">Sensitivity analysis results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
