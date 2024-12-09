@@ -10,6 +10,6 @@ chapters:
 - file: 02-exercises-scenario-modelling
 - file: 03-tutorial-capacity-expansion
 - file: 03-exercises-capacity-expansion
-- file: 04-tutorial-storage-and-interconnection
-- file: 04-exercises-storage-and-interconnection
+- file: 04-tutorial-interconnection-and-multinodal
+- file: 04-exercises-interconnection-and-multinodal
 - file: conclusion
