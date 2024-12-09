@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Exercises 3: Capacity expansion &#8212; Energy system modelling workshop ESI</title>
+    <title>Exercises 3: Capacity expansion modelling &#8212; Energy system modelling workshop ESI</title>
   
   
   
@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial 4: Interconnection and multinodal networks" href="04-tutorial-interconnection-and-multinodal.html" />
-    <link rel="prev" title="Tutorial 3: Capacity expansion" href="03-tutorial-capacity-expansion.html" />
+    <link rel="prev" title="Tutorial 3: Capacity expansion modelling" href="03-tutorial-capacity-expansion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -174,8 +174,8 @@
 <li class="toctree-l1"><a class="reference internal" href="01-exercises-data-analysis.html">Exercises 1: Data analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-tutorial-scenario-modelling.html">Tutorial 2: Energy System Scenario Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">Exercises 2: Scenario modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">Tutorial 3: Capacity expansion</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercises 3: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">Tutorial 3: Capacity expansion modelling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercises 3: Capacity expansion modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-tutorial-interconnection-and-multinodal.html">Tutorial 4: Interconnection and multinodal networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-exercises-interconnection-and-multinodal.html">Exercises 4: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
@@ -311,7 +311,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -322,11 +324,21 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exercises 3: Capacity expansion</h1>
+    <h1>Exercises 3: Capacity expansion modelling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-reproducing-the-baseline-scenario">Exercise 1: Reproducing the baseline scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-analyzing-cost-sensitivity">Exercise 2: Analyzing cost sensitivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-adding-dispatchable-generation">Exercise 3: Adding dispatchable generation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -336,8 +348,92 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="exercises-3-capacity-expansion">
-<h1>Exercises 3: Capacity expansion<a class="headerlink" href="#exercises-3-capacity-expansion" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercises-3-capacity-expansion-modelling">
+<h1>Exercises 3: Capacity expansion modelling<a class="headerlink" href="#exercises-3-capacity-expansion-modelling" title="Link to this heading">#</a></h1>
+<section id="exercise-1-reproducing-the-baseline-scenario">
+<h2>Exercise 1: Reproducing the baseline scenario<a class="headerlink" href="#exercise-1-reproducing-the-baseline-scenario" title="Link to this heading">#</a></h2>
+<p><em>This exercise helps you understand the basic PyPSA model setup and optimization workflow.</em></p>
+<p>Your task is to reproduce the baseline scenario from the tutorial with the following modifications:</p>
+<ol class="arabic simple">
+<li><p>Create a new network using the same input data but with a lower battery storage EP_RATIO of 2 hours instead of 6</p></li>
+<li><p>Run the optimization with renewable generation limits</p></li>
+<li><p>Create a bar plot comparing your results with the original baseline scenario (500 GW solar, 230 GW wind, 130 GW storage)</p></li>
+<li><p>Explain in 2-3 sentences how the change in storage duration affects the optimal system configuration</p></li>
+</ol>
+</section>
+<section id="exercise-2-analyzing-cost-sensitivity">
+<h2>Exercise 2: Analyzing cost sensitivity<a class="headerlink" href="#exercise-2-analyzing-cost-sensitivity" title="Link to this heading">#</a></h2>
+<p><em>This exercise develops your understanding of how different cost assumptions impact system design.</em></p>
+<p>The tutorial explored scenarios with doubled generation and storage costs. Your task is to:</p>
+<ol class="arabic simple">
+<li><p>Create three scenarios:</p>
+<ul class="simple">
+<li><p>Baseline</p>
+<ul>
+<li><p>Include flow batteries (FLOW_EP_RATIO = 100)</p></li>
+<li><p>Remove upper limits on generation technologies</p></li>
+</ul>
+</li>
+<li><p>Cheap wind and flow batteries<br />
+<em>(halve the cost for flow batteries, reduce the cost of wind by 25%)</em></p></li>
+<li><p>Cheap solar and li-ion batteries<br />
+<em>(halve the cost for li-ion batteries, reduce the cost of solar by 25%)</em></p></li>
+</ul>
+</li>
+<li><p>Create plots showing:</p>
+<ul class="simple">
+<li><p>Installed capacities for each technology</p></li>
+<li><p>Relative system costs compared to baseline</p></li>
+</ul>
+</li>
+<li><p>Write a brief analysis explaining why the system reacts differently to cost reductions versus the cost increases shown in the tutorial</p></li>
+</ol>
+</section>
+<section id="exercise-3-adding-dispatchable-generation">
+<h2>Exercise 3: Adding dispatchable generation<a class="headerlink" href="#exercise-3-adding-dispatchable-generation" title="Link to this heading">#</a></h2>
+<p><em>This exercise helps you apply PyPSA modeling by integrating conventional generation technologies into a renewable-focused system.</em></p>
+<p>In this exercise, you will extend the baseline scenario by adding the option to invest in combined cycle gas turbine (CCGT) power plants. These plants can provide flexible backup generation but come with fuel costs and CO2 emissions.</p>
+<p>Add a new generator to the network with the following parameters:</p>
+<ol class="arabic simple">
+<li><p>Technology parameters for CCGT:</p>
+<ul class="simple">
+<li><p>Capital cost: 800 k€/MW</p></li>
+<li><p>Marginal cost: 70 €/MWh (including fuel costs)</p></li>
+<li><p>CO2 emission factor: 0.37 tonnes/MWh</p></li>
+<li><p>Efficiency: 60% (not needed but assumed for the emission factor)</p></li>
+</ul>
+</li>
+</ol>
+<p>Your tasks:</p>
+<ol class="arabic simple">
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">create_network</span></code> function from the tutorial to include the CCGT generator</p></li>
+<li><p>Run three scenarios:</p>
+<ul class="simple">
+<li><p>Baseline (from tutorial)</p></li>
+<li><p>Baseline + CCGT without CO2 price</p></li>
+<li><p>Baseline + CCGT with CO2 price of 100 €/tonne</p></li>
+</ul>
+</li>
+<li><p>Create visualizations showing:</p>
+<ul class="simple">
+<li><p>Installed capacities for all technologies in each scenario</p></li>
+<li><p>Annual CO2 emissions for each scenario</p></li>
+<li><p>Generation mix during the week in February (like in the tutorial)</p></li>
+</ul>
+</li>
+<li><p>Write a brief analysis explaining:</p>
+<ul class="simple">
+<li><p>Under what conditions does the model choose to invest in CCGT capacity?</p></li>
+<li><p>What is the impact the system configuration?</p></li>
+<li><p>How does the CO2 price affect the role of gas in the system? What does that tell you in terms of policy design?</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Consider adding the CO2 price by changing the marginal cost of the CCGT in the scenario by adding the emissions cost (CO2 price × emission factor) to the fuel cost.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -376,7 +472,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial 3: Capacity expansion</p>
+        <p class="prev-next-title">Tutorial 3: Capacity expansion modelling</p>
       </div>
     </a>
     <a class="right-next"
@@ -394,6 +490,24 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-reproducing-the-baseline-scenario">Exercise 1: Reproducing the baseline scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-analyzing-cost-sensitivity">Exercise 2: Analyzing cost sensitivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-adding-dispatchable-generation">Exercise 3: Adding dispatchable generation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
