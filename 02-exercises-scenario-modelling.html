@@ -311,7 +311,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -327,6 +329,16 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-reproducing-household-heating-scenarios">Exercise 1: “Reproducing household heating scenarios”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-analyzing-system-interactions-in-the-etm">Exercise 2: “Analyzing system interactions in the ETM”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-designing-a-resilient-rotterdam-energy-system">Exercise 3: “Designing a resilient Rotterdam energy system”</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -338,6 +350,97 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercises-2-scenario-modelling">
 <h1>Exercises 2: Scenario modelling<a class="headerlink" href="#exercises-2-scenario-modelling" title="Link to this heading">#</a></h1>
+<section id="exercise-1-reproducing-household-heating-scenarios">
+<h2>Exercise 1: “Reproducing household heating scenarios”<a class="headerlink" href="#exercise-1-reproducing-household-heating-scenarios" title="Link to this heading">#</a></h2>
+<p><em>This exercise helps you understand the basic ETM interface and scenario analysis workflow.</em></p>
+<p>Your task is to recreate two heating scenarios similar to the tutorial using the ETM:</p>
+<ol class="arabic simple">
+<li><p>Set up the base scenario:</p>
+<ul class="simple">
+<li><p>Open the <a class="reference external" href="https://energytransitionmodel.com/saved_scenarios/14553">II3050 National Leadership scenario</a> for the Netherlands in 2050</p></li>
+<li><p>Navigate to the household heating section</p></li>
+<li><p>Document the initial network capacity requirements by adding the <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">network</span> <span class="pre">capacity</span> <span class="pre">and</span> <span class="pre">peaks</span></code> table to your view</p></li>
+<li><p>Record the following metrics:</p>
+<ul>
+<li><p>Network capacity change (GW)</p></li>
+<li><p>Number of blackout hours</p></li>
+<li><p>System cost changes</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Chang the scenario (100% air heat pumps):</p>
+<ul class="simple">
+<li><p>Modify the heating parameters so that we switch to 100% air heat pumps</p></li>
+<li><p>Record the following metrics:</p>
+<ul>
+<li><p>Network capacity change (GW)</p></li>
+<li><p>Number of blackout hours</p></li>
+<li><p>System cost changes</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Write a brief summary comparing your results with those presented in the tutorial.</p></li>
+</ol>
+</section>
+<section id="exercise-2-analyzing-system-interactions-in-the-etm">
+<h2>Exercise 2: “Analyzing system interactions in the ETM”<a class="headerlink" href="#exercise-2-analyzing-system-interactions-in-the-etm" title="Link to this heading">#</a></h2>
+<p><em>This exercise develops your understanding of how different energy system components affect each other.</em></p>
+<p>Investigate how different combinations of heating technologies and EV charging strategies affect system stability:</p>
+<ol class="arabic simple">
+<li><p>Starting from the (<a class="reference external" href="https://energytransitionmodel.com/saved_scenarios/14553">https://energytransitionmodel.com/saved_scenarios/14553</a>) , create three variations:</p>
+<ul class="simple">
+<li><p>Variant 1: 50% air heat pumps, 50% district heating, default EV charging</p></li>
+<li><p>Variant 2: Same heating mix but increase EV “Deployable capacity” to 80%</p></li>
+<li><p>Variant 3: Your own combination targeting minimal grid impact</p></li>
+</ul>
+</li>
+<li><p>For each variant, analyze:</p>
+<ul class="simple">
+<li><p>Grid stability indicators (blackout hours, network capacity)</p></li>
+<li><p>System costs</p></li>
+<li><p>Biomass import requirements</p></li>
+</ul>
+</li>
+<li><p>Write a short analysis that:</p>
+<ul class="simple">
+<li><p>Explains the observed system interactions</p></li>
+<li><p>Identifies unexpected effects</p></li>
+<li><p>Recommends the most robust configuration</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="exercise-3-designing-a-resilient-rotterdam-energy-system">
+<h2>Exercise 3: “Designing a resilient Rotterdam energy system”<a class="headerlink" href="#exercise-3-designing-a-resilient-rotterdam-energy-system" title="Link to this heading">#</a></h2>
+<p><em>This exercise helps you apply ETM analysis to real-world energy planning challenges.</em></p>
+<ol class="arabic simple">
+<li><p>Start a new scenario for the region of Rotterdam (see screenshot), you can type and search in the dropdown
+<img alt="Start a new Rotterdam scenario in the ETM" src="_images/etm_rotterdam.png" /></p></li>
+<li><p>Use the ETM to develop two contrasting energy system configurations:</p>
+<ul class="simple">
+<li><p>Configuration A: Maximize renewability of the energy-mix through deployment of renewable energy generation</p></li>
+<li><p>Configuration B: Reduce emissions of the Rotterdam energy system by 50% (CO2 emissions relative to 1990) without using more than 150% import</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For higher <strong>renewability</strong>, increase the deployed capacity of wind turbines in <code class="docutils literal notranslate"><span class="pre">Supply</span> <span class="pre">&gt;</span> <span class="pre">Renewable</span> <span class="pre">electricity</span> <span class="pre">&gt;</span> <span class="pre">Wind</span> <span class="pre">turbines</span></code>.
+To effectively reduce emissions in the Rotterdam region, change the energy sources of industries <code class="docutils literal notranslate"><span class="pre">Demand</span> <span class="pre">&gt;</span> <span class="pre">Industry</span></code>. This is 80% of the total energy demand.</p>
+</div>
+<ol class="arabic simple">
+<li><p>For each configuration analyse:</p>
+<ul class="simple">
+<li><p>Technical specifications for both configurations</p></li>
+<li><p>Comparison of infrastructure requirements</p></li>
+<li><p>Cost-benefit analysis</p></li>
+<li><p>Recommendation with justification based on resilience, costs, and environmental impact</p></li>
+</ul>
+</li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -394,6 +497,24 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-reproducing-household-heating-scenarios">Exercise 1: “Reproducing household heating scenarios”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-analyzing-system-interactions-in-the-etm">Exercise 2: “Analyzing system interactions in the ETM”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-designing-a-resilient-rotterdam-energy-system">Exercise 3: “Designing a resilient Rotterdam energy system”</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
