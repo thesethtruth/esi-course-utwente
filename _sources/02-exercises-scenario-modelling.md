@@ -28,12 +28,11 @@ Your task is to recreate two heating scenarios similar to the tutorial using the
 
 Investigate how different combinations of heating technologies and EV charging strategies affect system stability:
 
-1. Starting from the (https://energytransitionmodel.com/saved_scenarios/14553) , create three variations:
-   - Variant 1: 50% air heat pumps, 50% district heating, default EV charging
-   - Variant 2: Same heating mix but increase EV "Deployable capacity" to 80%
-   - Variant 3: Your own combination targeting minimal grid impact
+1. Starting from the [II3050 National Leadership scenario](https://energytransitionmodel.com/saved_scenarios/14553) , create three variations:
+   - Variant 1: 50% electric boilers, 50% district heating, default EV charging
+   - Variant 2: Your own combination targeting minimal grid impact and lower system costs
 
-2. For each variant, analyze:
+2. For both variants, analyze:
    - Grid stability indicators (blackout hours, network capacity)
    - System costs
    - Biomass import requirements
@@ -54,10 +53,10 @@ Investigate how different combinations of heating technologies and EV charging s
 
 :::{hint}
 For higher **renewability**, increase the deployed capacity of wind turbines in `Supply > Renewable electricity > Wind turbines`. 
-To effectively reduce emissions in the Rotterdam region, change the energy sources of industries `Demand > Industry`. This is 80% of the total energy demand. 
+To effectively **reduce emissions** in the Rotterdam region, change the energy sources of industries `Demand > Industry`. This is 80% of the total energy demand. 
 :::
 
-1. For each configuration analyse:
+3. For each configuration analyse:
    - Technical specifications for both configurations
    - Comparison of infrastructure requirements
    - Cost-benefit analysis
