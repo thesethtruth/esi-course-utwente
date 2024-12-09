@@ -178,6 +178,8 @@
 <li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">Exercises 2: Scenario modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-tutorial-capacity-expansion.html">Tutorial 3: Capacity expansion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">Exercises 3: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tutorial-interconnection-and-multinodal.html">Tutorial 4: Interconnection and multinodal networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-exercises-interconnection-and-multinodal.html">Exercises 4: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 
@@ -365,6 +367,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-the-data">Fetching the data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-generation">Renewable generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wind-energy-generation-parameters">Wind energy generation parameters</a></li>
@@ -399,6 +402,14 @@
   <section class="tex2jax_ignore mathjax_ignore" id="tutorial-1-energy-data-analysis">
 <h1>Tutorial 1: Energy data analysis<a class="headerlink" href="#tutorial-1-energy-data-analysis" title="Link to this heading">#</a></h1>
 <p>This tutorial will learn you how to use data analysis to obtain insight into the context of your energy system. This allows you to get a feeling for the challenges you will have to solve using energy system integration. By first understanding the context, you can better formulate your research questions and hypothesis. Moreover, it forms the fundamental understanding of your energy system that will allow you to explain system dynamics that arise.</p>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Fetch and load energy generation and demand data</p></li>
+<li><p>Visualize energy generation and demand</p></li>
+<li><p>Identify seasonal patterns and calculate key energy metrics</p></li>
+</ul>
+</section>
 <section id="fetching-the-data">
 <h2>Fetching the data<a class="headerlink" href="#fetching-the-data" title="Link to this heading">#</a></h2>
 <section id="renewable-generation">
@@ -730,7 +741,7 @@ Solar FLH: 1362.12 hours
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f043da30470&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f043ea162a0&gt;
 </pre></div>
 </div>
 <img alt="_images/dc38783f054a15a42cc8f115d7d8c666ce1f725ad48a830640aceb88749d29f7.png" src="_images/dc38783f054a15a42cc8f115d7d8c666ce1f725ad48a830640aceb88749d29f7.png" />
@@ -856,6 +867,7 @@ In contrast, industrial and transport sectors show more balanced patterns, with 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-the-data">Fetching the data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-generation">Renewable generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wind-energy-generation-parameters">Wind energy generation parameters</a></li>

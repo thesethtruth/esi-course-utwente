@@ -24,6 +24,11 @@ This workshop is organized into four chapters, each designed to deepen your unde
 
 Happy learning!
 
+## Prerequisites 
+1. Install Python and Poetry according to the [Installation Guide](#installation-guide-energy-system-integration), which covers how to set up your PyPSA environment
+2. Download the workshop [data files from the course repository](https://github.com/thesethtruth/esi-course-utwente/tree/main/esi-modelling-workshop/data). We'll use these example datasets throughout the workshop.
+
+
 ## Useful sources
 
 ### Documentation

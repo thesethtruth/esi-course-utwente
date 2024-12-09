@@ -176,6 +176,8 @@
 <li class="toctree-l1"><a class="reference internal" href="02-exercises-scenario-modelling.html">Exercises 2: Scenario modelling</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial 3: Capacity expansion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-exercises-capacity-expansion.html">Exercises 3: Capacity expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-tutorial-interconnection-and-multinodal.html">Tutorial 4: Interconnection and multinodal networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-exercises-interconnection-and-multinodal.html">Exercises 4: Storage, dispatchable generation and interconnection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 
@@ -388,13 +390,11 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-scenarios-and-run-the-optimisation-problems">Define scenarios and run the optimisation problems</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-and-visualization">Results Analysis and Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-visualisation">Results visualisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis-results">Sensitivity analysis results</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
 </ul>
@@ -627,9 +627,9 @@ INFO:linopy.model:Solver options:
  - primal_feasibility_tolerance: 1e-05
  - dual_feasibility_tolerance: 1e-05
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 41.10it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 88.39it/s]
-INFO:linopy.io: Writing time: 0.49s
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 41.47it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 99.18it/s]
+INFO:linopy.io: Writing time: 0.47s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
@@ -646,16 +646,16 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(2.88434e+08) 0s
-      20220     8.4002676480e+08 Pr: 13419(2.8302e+11); Du: 0(0.000685162) 6s
+      17392     8.3806783045e+08 Pr: 12032(1.38802e+11); Du: 0(0.000685959) 5s
       36450     1.2025215527e+09 Pr: 0(0); Du: 0(1.21225e-12) 10s
 Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-mrkpyvip
+Model name          : linopy-problem-jr192ado
 Model status        : Optimal
 Simplex   iterations: 36450
 Objective value     :  1.2025215527e+09
 Relative P-D gap    :  2.7757174913e-15
-HiGHS run time      :         10.14
-Writing the solution to /tmp/linopy-solve-ikm19emw.sol
+HiGHS run time      :         10.36
+Writing the solution to /tmp/linopy-solve-5rhrhsfp.sol
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
@@ -744,9 +744,9 @@ INFO:linopy.model:Solver options:
  - primal_feasibility_tolerance: 1e-05
  - dual_feasibility_tolerance: 1e-05
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 40.93it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 65.59it/s]
-INFO:linopy.io: Writing time: 0.51s
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 42.99it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 82.10it/s]
+INFO:linopy.io: Writing time: 0.48s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
@@ -763,15 +763,14 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(2.88434e+08) 0s
-       9002     2.2174740770e+08 Pr: 11220(4.14063e+10); Du: 0(0.000391046) 7s
-      39571     1.7644238200e+09 Pr: 0(0); Du: 0(6.7335e-13) 10s
+      22648     1.0572706864e+09 Pr: 9883(7.01578e+10); Du: 0(0.00171288) 5s
+      31363     1.2643315278e+09 Pr: 2006(3.50648e+07); Du: 0(0.00374069) 11s
+      39571     1.7644238200e+09 Pr: 0(0); Du: 0(6.7335e-13) 11s
 Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-6ce4rl96
+Model name          : linopy-problem-b6c1or7u
 Model status        : Optimal
 Simplex   iterations: 39571
 Objective value     :  1.7644238200e+09
-Relative P-D gap    :  2.9051973753e-14
-HiGHS run time      :         10.36
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
@@ -785,7 +784,9 @@ Solver message: optimal
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-ull82aq8.sol
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative P-D gap    :  2.9051973753e-14
+HiGHS run time      :         10.96
+Writing the solution to /tmp/linopy-solve-anmbhe_6.sol
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -867,9 +868,9 @@ INFO:linopy.model:Solver options:
  - primal_feasibility_tolerance: 1e-05
  - dual_feasibility_tolerance: 1e-05
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 27.29it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 64.36it/s]
-INFO:linopy.io: Writing time: 0.71s
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 27.36it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 62.17it/s]
+INFO:linopy.io: Writing time: 0.7s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
@@ -887,19 +888,19 @@ Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
       12160     1.8623553094e+08 Pr: 14874(3.04767e+10); Du: 0(0.00164249) 6s
-      18075     1.8738298523e+08 Pr: 17422(9.16745e+10); Du: 0(0.00227149) 11s
-      23161     1.8881790897e+08 Pr: 19606(1.58739e+11); Du: 0(0.00280235) 17s
-      27088     1.8986007861e+08 Pr: 21214(2.07089e+11); Du: 0(0.00374331) 23s
-      28739     3.1744926814e+08 Pr: 21302(2.66921e+11); Du: 0(0.00379979) 29s
-      31281     3.6779305938e+08 Pr: 21078(7.42084e+10); Du: 0(0.00353308) 34s
-      34243     5.8487688436e+08 Pr: 37451(9.3575e+11); Du: 0(0.00281197) 39s
-      38652     6.3551931227e+08 Pr: 17331(1.10048e+11); Du: 0(0.00264149) 45s
-      44248     8.2510192110e+08 Pr: 17787(1.64779e+10); Du: 0(0.00397365) 51s
-      49751     1.0131698839e+09 Pr: 32853(5.91491e+09); Du: 0(0.00406809) 56s
-      62089     1.1546633084e+09 Pr: 34242(1.09336e+10); Du: 0(0.0035182) 64s
-      76312     1.1844667613e+09 Pr: 0(0); Du: 0(7.02838e-12) 68s
+      17198     1.8718267060e+08 Pr: 17058(7.99661e+10); Du: 0(0.00204629) 11s
+      21942     1.8843983537e+08 Pr: 19082(1.40572e+11); Du: 0(0.00272412) 17s
+      25860     1.8951551343e+08 Pr: 20686(1.90755e+11); Du: 0(0.00344047) 23s
+      28739     3.1744926814e+08 Pr: 21302(2.66921e+11); Du: 0(0.00379979) 31s
+      31281     3.6779305938e+08 Pr: 21078(7.42084e+10); Du: 0(0.00353308) 36s
+      34243     5.8487688436e+08 Pr: 37451(9.3575e+11); Du: 0(0.00281197) 42s
+      38652     6.3551931227e+08 Pr: 17331(1.10048e+11); Du: 0(0.00264149) 47s
+      45183     9.2581428389e+08 Pr: 36514(2.68435e+10); Du: 0(0.00390185) 54s
+      54384     1.0985648279e+09 Pr: 14907(2.37384e+09); Du: 0(0.00450506) 60s
+      64289     1.1577672564e+09 Pr: 3050(1.17193e+08); Du: 0(0.00353224) 66s
+      76312     1.1844667613e+09 Pr: 0(0); Du: 0(7.02838e-12) 70s
 Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-vq1nshyf
+Model name          : linopy-problem-84l_bh4r
 Model status        : Optimal
 Simplex   iterations: 76312
 Objective value     :  1.1844667613e+09
@@ -917,8 +918,8 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative P-D gap    :  7.4476445564e-15
-HiGHS run time      :         68.54
-Writing the solution to /tmp/linopy-solve-jdtj8wnz.sol
+HiGHS run time      :         69.70
+Writing the solution to /tmp/linopy-solve-afoddizw.sol
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -975,8 +976,8 @@ Writing the solution to /tmp/linopy-solve-jdtj8wnz.sol
 <h2>Sensitivity analysis<a class="headerlink" href="#sensitivity-analysis" title="Link to this heading">#</a></h2>
 <section id="define-scenarios-and-run-the-optimisation-problems">
 <h3>Define scenarios and run the optimisation problems<a class="headerlink" href="#define-scenarios-and-run-the-optimisation-problems" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and solve networks with different cost scenarios</span>
 <span class="n">scenarios</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
@@ -999,6 +1000,11 @@ Writing the solution to /tmp/linopy-solve-jdtj8wnz.sol
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
@@ -1007,10 +1013,13 @@ Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
 /home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
   warn(
 INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 26.99it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 62.47it/s]
-INFO:linopy.io: Writing time: 0.71s
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 27.89it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 59.46it/s]
+INFO:linopy.io: Writing time: 0.7s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
@@ -1027,50 +1036,124 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
-      10829     2.0078874152e+08 Pr: 14636(2.96392e+10); Du: 0(4.13542e-07) 6s
-      16531     2.0202901339e+08 Pr: 17102(8.63049e+10); Du: 0(4.61548e-07) 12s
-      20973     2.0332679358e+08 Pr: 18945(1.47268e+11); Du: 0(4.98494e-07) 18s
-      23935     2.0449526677e+08 Pr: 20233(2.00132e+11); Du: 0(5.80821e-07) 26s
-      26806     3.6180356239e+08 Pr: 20026(6.98268e+10); Du: 0(5.13956e-07) 32s
-      30325     6.4114009675e+08 Pr: 35096(1.5566e+10); Du: 0(3.93349e-07) 40s
-      35580     6.7169789358e+08 Pr: 35427(2.18765e+10); Du: 0(4.77831e-07) 48s
-      39384     7.1641617885e+08 Pr: 35866(3.28844e+10); Du: 0(4.86904e-07) 54s
-      42281     8.9458150482e+08 Pr: 19891(2.57291e+11); Du: 0(4.18734e-07) 62s
-      46595     9.4420597206e+08 Pr: 34229(7.05994e+10); Du: 0(3.37482e-07) 68s
-      51861     1.2338467876e+09 Pr: 37939(3.15752e+10); Du: 0(5.23816e-07) 73s
-      57777     1.3279369313e+09 Pr: 5751(3.15662e+08); Du: 0(3.45493e-07) 79s
-      62929     1.3801491707e+09 Pr: 1067(9.37847e+06); Du: 0(6.80266e-07) 85s
-      64049     1.3819258190e+09 Pr: 0(0); Du: 0(7.60392e-13) 86s
+      12160     1.8623553094e+08 Pr: 14874(3.04767e+10); Du: 0(0.00164249) 6s
+      18075     1.8738298523e+08 Pr: 17422(9.16745e+10); Du: 0(0.00227149) 11s
+      23161     1.8881790897e+08 Pr: 19606(1.58739e+11); Du: 0(0.00280235) 17s
+      27088     1.8986007861e+08 Pr: 21214(2.07089e+11); Du: 0(0.00374331) 23s
+      28739     3.1744926814e+08 Pr: 21302(2.66921e+11); Du: 0(0.00379979) 29s
+      31281     3.6779305938e+08 Pr: 21078(7.42084e+10); Du: 0(0.00353308) 35s
+      34243     5.8487688436e+08 Pr: 37451(9.3575e+11); Du: 0(0.00281197) 40s
+      38652     6.3551931227e+08 Pr: 17331(1.10048e+11); Du: 0(0.00264149) 46s
+      44248     8.2510192110e+08 Pr: 17787(1.64779e+10); Du: 0(0.00397365) 52s
+      49751     1.0131698839e+09 Pr: 32853(5.91491e+09); Du: 0(0.00406809) 57s
+      58469     1.1310300563e+09 Pr: 5691(4.20632e+08); Du: 0(0.00401105) 65s
+      72840     1.1814921064e+09 Pr: 1640(1.93166e+07); Du: 0(0.00526611) 71s
+      76312     1.1844667613e+09 Pr: 0(0); Du: 0(7.02838e-12) 72s
 Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-jze6jmhm
+Model name          : linopy-problem-2jquwdks
 Model status        : Optimal
-Simplex   iterations: 64049
-Objective value     :  1.3819258190e+09
-Relative P-D gap    :  7.5911581765e-15
-HiGHS run time      :         85.93
-Writing the solution to /tmp/linopy-solve-83lipf3u.sol
+Simplex   iterations: 76312
+Objective value     :  1.1844667613e+09
+Relative P-D gap    :  7.4476445564e-15
+HiGHS run time      :         71.85
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 70084 primals, 166446 duals
-Objective: 1.38e+09
+Objective: 1.18e+09
 Solver model: available
 Solver message: optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-igi72umu.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
 WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
 /home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
   warn(
 INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 28.14it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 64.64it/s]
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 28.02it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 66.72it/s]
 INFO:linopy.io: Writing time: 0.69s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
+Coefficient ranges:
+  Matrix [1e-03, 1e+02]
+  Cost   [5e-01, 3e+03]
+  Bound  [0e+00, 0e+00]
+  RHS    [2e+04, 3e+05]
+Presolving model
+91953 rows, 65677 cols, 249579 nonzeros  0s
+91953 rows, 65677 cols, 249579 nonzeros  0s
+Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
+      12154     1.8629435974e+08 Pr: 14919(2.6928e+10); Du: 0(0.00161685) 6s
+      17486     1.8747845492e+08 Pr: 17240(8.07018e+10); Du: 0(0.00220029) 11s
+      22167     1.8899507311e+08 Pr: 19197(1.41553e+11); Du: 0(0.00276781) 16s
+      26578     1.9089992278e+08 Pr: 21124(2.26527e+11); Du: 0(0.00285984) 26s
+      29890     3.4561171789e+08 Pr: 21653(1.36529e+11); Du: 0(0.00317713) 32s
+      33581     3.7300537692e+08 Pr: 21521(1.98926e+11); Du: 0(0.0026611) 37s
+      35501     6.8653366632e+08 Pr: 17395(2.70996e+10); Du: 0(0.00262549) 43s
+      38459     9.2146333615e+08 Pr: 34665(2.76269e+10); Du: 0(0.00255441) 49s
+      43425     1.0379168700e+09 Pr: 34471(4.58596e+10); Du: 0(0.00336107) 56s
+      45541     1.0725731154e+09 Pr: 34647(4.80194e+10); Du: 0(0.00346386) 62s
+      51089     1.2588116694e+09 Pr: 12861(2.38788e+09); Du: 0(0.00310731) 68s
+      56524     1.3764401555e+09 Pr: 7566(1.2695e+09); Du: 0(0.00308137) 73s
+      62344     1.4633140902e+09 Pr: 2423(4.93041e+07); Du: 0(0.00439701) 79s
+      64597     1.4694272694e+09 Pr: 0(0); Du: 0(3.39427e-11) 81s
+      64597     1.4694272694e+09 Pr: 0(0); Du: 0(3.39427e-11) 81s
+Solving the original LP from the solution after postsolve
+Model name          : linopy-problem-1nx5v352
+Model status        : Optimal
+Simplex   iterations: 64597
+Objective value     :  1.4694272694e+09
+Relative P-D gap    :  5.1920872098e-15
+HiGHS run time      :         81.12
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 70084 primals, 166446 duals
+Objective: 1.47e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-i6qfaceh.sol
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
+  warn(
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model:Solver options:
+ - primal_feasibility_tolerance: 1e-05
+ - dual_feasibility_tolerance: 1e-05
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 26.07it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 58.14it/s]
+INFO:linopy.io: Writing time: 0.74s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
@@ -1087,109 +1170,39 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
-       8252     2.0049896311e+08 Pr: 13451(1.22835e+10); Du: 0(4.37567e-07) 7s
-      14345     2.0176564085e+08 Pr: 16114(6.23753e+10); Du: 0(6.55286e-07) 12s
-      19348     2.0316815075e+08 Pr: 18332(1.16312e+11); Du: 0(7.37611e-07) 17s
-      22671     2.0435855010e+08 Pr: 19794(1.58931e+11); Du: 0(6.86099e-07) 23s
-      26180     3.6144549772e+08 Pr: 19491(4.88207e+10); Du: 0(6.3827e-07) 29s
-      29998     7.5960989954e+08 Pr: 34110(5.10856e+10); Du: 0(4.32111e-07) 36s
-      34831     7.6058488010e+08 Pr: 35013(7.81853e+10); Du: 0(4.95672e-07) 46s
-      37769     8.1164955339e+08 Pr: 34746(6.80415e+10); Du: 0(6.22622e-07) 52s
-      40846     9.1602096039e+08 Pr: 36764(7.80199e+10); Du: 0(5.42615e-07) 58s
-      43552     1.0272633897e+09 Pr: 34329(2.00905e+10); Du: 0(5.77779e-07) 63s
-      46282     1.1472580456e+09 Pr: 36620(4.55435e+10); Du: 0(4.7278e-07) 68s
-      50757     1.4714910177e+09 Pr: 17105(4.18418e+09); Du: 0(5.22039e-07) 78s
-      56224     1.6735926435e+09 Pr: 34949(1.30341e+10); Du: 0(8.16692e-07) 83s
-      60304     1.7507146331e+09 Pr: 8764(4.50142e+09); Du: 0(3.73758e-07) 88s
-      65319     1.7948140475e+09 Pr: 4630(2.43666e+09); Du: 0(5.59382e-07) 94s
-      67251     1.8004621056e+09 Pr: 0(0); Du: 0(3.88698e-11) 96s
+      12703     2.0489470433e+08 Pr: 13108(6.74711e+10); Du: 0(0.000110946) 6s
+      16219     2.0639473589e+08 Pr: 14226(1.25799e+11); Du: 0(0.000113852) 12s
+      20599     2.0876460028e+08 Pr: 15557(2.17646e+11); Du: 0(6.5762e-05) 17s
+      24885     2.1180214621e+08 Pr: 16805(3.37596e+11); Du: 0(2.87633e-05) 22s
+      28780     3.6006370339e+08 Pr: 22921(8.00132e+09); Du: 0(0.000254273) 28s
+      32743     7.0655272102e+08 Pr: 35444(5.189e+10); Du: 0(0.00108661) 35s
+      37263     8.3214993063e+08 Pr: 35309(2.11233e+10); Du: 0(0.0015753) 41s
+      39920     8.5589755519e+08 Pr: 20430(1.62566e+10); Du: 0(0.00211412) 50s
+      42957     9.1996282976e+08 Pr: 34670(2.82353e+10); Du: 0(0.00245885) 56s
+      46898     9.7758558247e+08 Pr: 17530(7.7805e+09); Du: 0(0.0029493) 61s
+      51334     1.0595044871e+09 Pr: 14641(9.76205e+09); Du: 0(0.00327851) 66s
+      56623     1.1927766045e+09 Pr: 33264(1.46378e+10); Du: 0(0.00323071) 72s
+      62079     1.2694809687e+09 Pr: 14228(4.87321e+09); Du: 0(0.00450072) 78s
+      64547     1.3397520990e+09 Pr: 12356(2.37925e+09); Du: 0(0.00452715) 84s
+      69694     1.4799065430e+09 Pr: 36689(8.19745e+09); Du: 0(0.00480656) 90s
+      73479     1.5311009901e+09 Pr: 5398(3.80298e+08); Du: 0(0.00532698) 95s
+      78428     1.5646680992e+09 Pr: 4826(1.59483e+09); Du: 0(0.00574353) 102s
+      79839     1.5662568840e+09 Pr: 0(0); Du: 0(1.7585e-10) 103s
 Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-eca0dp_2
+Model name          : linopy-problem-1w46vs78
 Model status        : Optimal
-Simplex   iterations: 67251
-Objective value     :  1.8004621056e+09
-Relative P-D gap    :  5.0319892753e-15
-HiGHS run time      :         96.15
+Simplex   iterations: 79839
+Objective value     :  1.5662568840e+09
+Relative P-D gap    :  8.9810913591e-15
+HiGHS run time      :        103.64
+Writing the solution to /tmp/linopy-solve-e108d6c5.sol
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 70084 primals, 166446 duals
-Objective: 1.80e+09
-Solver model: available
-Solver message: optimal
-
-INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing the solution to /tmp/linopy-solve-vprnh_4_.sol
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-/home/thesethtruth/.cache/pypoetry/virtualenvs/esi-course-6syH-QiP-py3.12/lib/python3.12/site-packages/linopy/common.py:154: UserWarning: coords for dimension(s) [&#39;Generator&#39;] is not aligned with the pandas object. Previously, the indexes of the pandas were ignored and overwritten in these cases. Now, the pandas object&#39;s coordinates are taken considered for alignment.
-  warn(
-INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 16/16 [00:00&lt;00:00, 26.79it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 58.06it/s]
-INFO:linopy.io: Writing time: 0.72s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.8.1 (git hash: 4a7f24a): Copyright (c) 2024 HiGHS under MIT licence terms
-Coefficient ranges:
-  Matrix [1e-03, 1e+02]
-  Cost   [5e-01, 6e+03]
-  Bound  [0e+00, 0e+00]
-  RHS    [2e+04, 3e+05]
-Presolving model
-91953 rows, 65677 cols, 249579 nonzeros  0s
-91953 rows, 65677 cols, 249579 nonzeros  0s
-Presolve : Reductions: rows 91953(-74493); columns 65677(-4407); elements 249579(-78900)
-Solving the presolved LP
-Using EKK dual simplex solver - serial
-  Iteration        Objective     Infeasibilities num(sum)
-          0     0.0000000000e+00 Pr: 8760(4.83545e+08) 0s
-      12454     2.0499658269e+08 Pr: 13011(6.39438e+10); Du: 0(1.02538e-07) 6s
-      17279     2.0729501908e+08 Pr: 14535(1.45605e+11); Du: 0(1.02538e-07) 14s
-      21567     2.1010135268e+08 Pr: 15813(2.43517e+11); Du: 0(1.02538e-07) 19s
-      25336     2.1315855408e+08 Pr: 16892(3.54561e+11); Du: 0(3.21475e-08) 24s
-      28179     3.4514256131e+08 Pr: 24665(2.16081e+10) 30s
-      32518     4.3559447277e+08 Pr: 36333(1.14716e+11); Du: 0(2.35122e-08) 36s
-      34693     4.6797538880e+08 Pr: 36729(1.36514e+11); Du: 0(2.35122e-08) 42s
-      36537     6.8420417873e+08 Pr: 23042(6.13188e+10); Du: 0(9.42753e-08) 49s
-      40328     7.9648449275e+08 Pr: 23182(3.10041e+10); Du: 0(9.00538e-08) 57s
-      44183     1.2889162547e+09 Pr: 45155(9.51759e+10); Du: 0(9.00538e-08) 65s
-      46406     1.3531102613e+09 Pr: 36625(7.10541e+10); Du: 0(9.00538e-08) 71s
-      48997     1.5005185598e+09 Pr: 19003(1.39307e+10); Du: 0(1.35252e-07) 80s
-      50011     1.5215846861e+09 Pr: 19711(7.59233e+10); Du: 0(1.35252e-07) 85s
-      52879     1.5463869441e+09 Pr: 19064(9.28211e+09); Du: 0(1.35252e-07) 91s
-      56274     1.5726580497e+09 Pr: 36614(1.12314e+10); Du: 0(1.35252e-07) 97s
-      59493     1.6195562584e+09 Pr: 39027(1.89399e+11); Du: 0(1.88387e-07) 102s
-      63551     1.6769157089e+09 Pr: 30616(1.12499e+09); Du: 0(8.83848e-08) 109s
-      66943     1.8033264811e+09 Pr: 34773(7.99679e+09); Du: 0(3.98244e-07) 115s
-      68103     1.8100493214e+09 Pr: 6895(6.75874e+08); Du: 0(3.60333e-07) 120s
-      72530     1.8501027988e+09 Pr: 29960(4.6737e+08); Du: 0(3.25928e-07) 126s
-      75575     1.8573619073e+09 Pr: 0(0); Du: 0(1.61045e-07) 131s
-      75575     1.8571737608e+09 Pr: 0(0) 131s
-Solving the original LP from the solution after postsolve
-Model name          : linopy-problem-mucdulra
-Model status        : Optimal
-Simplex   iterations: 75575
-Objective value     :  1.8571737608e+09
-Relative P-D gap    :  4.3648213540e-15
-HiGHS run time      :        131.32
-Writing the solution to /tmp/linopy-solve-jpoe3v_5.sol
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
-Status: ok
-Termination condition: optimal
-Solution: 70084 primals, 166446 duals
-Objective: 1.86e+09
+Objective: 1.57e+09
 Solver model: available
 Solver message: optimal
 
@@ -1197,12 +1210,12 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
-</section>
-<section id="results-analysis-and-visualization">
-<h2>Results Analysis and Visualization<a class="headerlink" href="#results-analysis-and-visualization" title="Link to this heading">#</a></h2>
-<p>Let’s analyze and compare the results from our different scenarios.</p>
+<section id="results-visualisation">
+<h3>Results visualisation<a class="headerlink" href="#results-visualisation" title="Link to this heading">#</a></h3>
+<p>Let’s visualise the results so we can compare the results from our different scenarios.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1251,9 +1264,10 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b83237a9efdf3bfcbf65cb2e3eea5c7561412585d5af939e51c3f5a091aea015.png" src="_images/b83237a9efdf3bfcbf65cb2e3eea5c7561412585d5af939e51c3f5a091aea015.png" />
+<img alt="_images/9c8e411f1a32c4cf0ec5fab781a44b1986335e4efc53ef18500ccc32c16c4502.png" src="_images/9c8e411f1a32c4cf0ec5fab781a44b1986335e4efc53ef18500ccc32c16c4502.png" />
 </div>
 </div>
+</section>
 <section id="sensitivity-analysis-results">
 <h3>Sensitivity analysis results<a class="headerlink" href="#sensitivity-analysis-results" title="Link to this heading">#</a></h3>
 <p>Comparing three cost scenarios reveals clear system adaptation patterns:</p>
@@ -1263,8 +1277,9 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <li><p>With <strong>doubled storage costs</strong>, the model shifts notably. While solar remains capped and wind drops slightly to 140 GW, battery storage is completely phased out in favor of increased flow battery capacity (83 GW). This suggests flow batteries’ longer duration becomes more valuable when storage is expensive. The scenario results in the highest cost increase at 34% above baseline. Interestingly, the deployed wind capacity is more sensitive towards the costs of storage than towards the cost of generation.</p></li>
 </ul>
 </section>
+</section>
 <section id="detailed-analysis-of-system-dynamics">
-<h3>Detailed analysis of system dynamics<a class="headerlink" href="#detailed-analysis-of-system-dynamics" title="Link to this heading">#</a></h3>
+<h2>Detailed analysis of system dynamics<a class="headerlink" href="#detailed-analysis-of-system-dynamics" title="Link to this heading">#</a></h2>
 <p>We might be interested in specific system dynamics of one of the scenarios during a specific week. Remember the first chapter of this tutorial? We found that February has a long period of high demand due to heating. Let’s see how each of the energy system configurations fares during this period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1354,12 +1369,11 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
   ax.set_ylim(None, 0)
 </pre></div>
 </div>
-<img alt="_images/470fe82dca3bb77c470e794f89c7dda0a7d6139a09d30ae0b16b9ec860ea5af2.png" src="_images/470fe82dca3bb77c470e794f89c7dda0a7d6139a09d30ae0b16b9ec860ea5af2.png" />
-<img alt="_images/919a2eaa52c7ba2f63504e322e3fab18085d463237d89f89ad01a97e350c0296.png" src="_images/919a2eaa52c7ba2f63504e322e3fab18085d463237d89f89ad01a97e350c0296.png" />
-<img alt="_images/2de87980501cb3d728ddde552deba8e4e62af936a47685b963c0df59f7ee7275.png" src="_images/2de87980501cb3d728ddde552deba8e4e62af936a47685b963c0df59f7ee7275.png" />
+<img alt="_images/d33b56d0d756e49b4befb9e4dfd015fdc429de38633a294b862b6e54bab2f9df.png" src="_images/d33b56d0d756e49b4befb9e4dfd015fdc429de38633a294b862b6e54bab2f9df.png" />
+<img alt="_images/e89af14bad7b2e1bf60d8cafe8750f266576f16b08b83463fb23099c9cbec82c.png" src="_images/e89af14bad7b2e1bf60d8cafe8750f266576f16b08b83463fb23099c9cbec82c.png" />
+<img alt="_images/65a1412a5f88574fab0c43ccea5178824a0b5067a27b207160f4e6e788cc6e9e.png" src="_images/65a1412a5f88574fab0c43ccea5178824a0b5067a27b207160f4e6e788cc6e9e.png" />
 </div>
 </div>
-</section>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
@@ -1475,13 +1489,11 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-scenarios-and-run-the-optimisation-problems">Define scenarios and run the optimisation problems</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-and-visualization">Results Analysis and Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-visualisation">Results visualisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis-results">Sensitivity analysis results</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-analysis-of-system-dynamics">Detailed analysis of system dynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
 </ul>
