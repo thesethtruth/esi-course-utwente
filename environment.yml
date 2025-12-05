@@ -1,0 +1,16 @@
+name: ut-esi-course-pypsa
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pypsa
+  - seaborn
+  - jupyter
+  - ipykernel
+  - cairosvg
+  - pip
+  - pip:
+      - highspy
+      - jupyter-book
+      - black

@@ -1,23 +1,21 @@
-[tool.poetry]
+[project]
 name = "esi-course"
 version = "0.1.0"
 description = ""
-authors = ["Seth van Wieringen <seth.van.wieringen@witteveenbos.com>"]
+authors = [{name = "Seth van Wieringen", email = "seth.van.wieringen@witteveenbos.com"}]
 readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "pypsa>=0.31.1",
+    "seaborn>=0.13.2",
+    "highspy>=1.8.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-pypsa = "^0.31.1"
-seaborn = "^0.13.2"
-highspy = "^1.8.1"
+[project.optional-dependencies]
+dev = [
+    "black>=24.10.0",
+    "ipykernel>=6.29.5",
+    "cairosvg>=2.7.1",
+    "jupyter-book>=1.0.3",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
-ipykernel = "^6.29.5"
-cairosvg = "^2.7.1"
-jupyter-book = "^1.0.3"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
