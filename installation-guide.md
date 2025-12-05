@@ -98,7 +98,7 @@ Select this environment as your Python interpreter in VSCode by using: `CTRL+SHI
 
 ### Step 6 - Validate your installation
 
-Make sure your conda environment is activated (`conda activate esi-course`), then run the example from lecture 6 directly using the Play button on top of the screen when you open the Python file. Or use the terminal directly: `python lecture-6/lecture-6-case-example.py`. This should run without errors.
+Make sure your conda environment is activated (`conda activate esi-course`), then run the example from this lecture directly using the Play button on top of the screen when you open the Python file. Or use the terminal directly: `python lecture/lecture-case-example.py`. This should run without errors.
 
 #### Run it interactively
 Use the Jupyter extension to run the file interactively. To do this, open the file and use `CTRL+SHIFT+P` > `Jupyter: Run Current File in Interactive Window`. This will open an interactive window, where you can explore variables, rerun code and inspect plots.
