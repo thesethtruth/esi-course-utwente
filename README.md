@@ -1,7 +1,7 @@
 # esi-course-utwente
 
-requirements are used to build the course website
+read installation as in installation-guide or just look at the website (link: https://thesethtruth.github.io/esi-course-utwente/intro.html)
 
-pyproject you can use if you prefer that but conda is recommended
+pyproject.toml is used to build the site, use UV for that
 
-jupyter-book build workshop
+jupyter-book builds workshop site (<2 version because does not work otherwise)
