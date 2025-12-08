@@ -5,3 +5,5 @@ read installation as in installation-guide or just look at the website (link: ht
 pyproject.toml is used to build the site, use UV for that
 
 jupyter-book builds workshop site (<2 version because does not work otherwise)
+
+Believe it builds only on the /gh-pages branch
