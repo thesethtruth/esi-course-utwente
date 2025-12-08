@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome &#8212; Energy system modelling workshop ESI</title>
+    <title>Welcome &#8212; Energy system modelling workshop ESI UTwente</title>
   
   
   
@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -69,7 +66,6 @@
     <link rel="next" title="Tutorial 1: Energy data analysis" href="01-tutorial-data-analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -85,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -94,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -101,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
         
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,18 +157,22 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Energy system modelling workshop ESI - Home"/>
-    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Energy system modelling workshop ESI - Home"/>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Energy system modelling workshop ESI UTwente - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Energy system modelling workshop ESI UTwente - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -304,16 +315,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -348,34 +367,36 @@
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-guide-energy-system-integration">Installation Guide: Energy System Integration</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-poetry">Explainer: Why Python, VSCode, and Poetry?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-conda">Explainer: Why Python, VSCode, and Conda?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode-visual-studio-code">VSCode (Visual Studio Code)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry">Poetry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">Anaconda</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-steps">Installation Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-python">Step 1 - Install Python</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-poetry">Step 2 - Install Poetry</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pipx">Install pipx</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-poetry">Install poetry</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-vscode">Step 3 - Install VScode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-anaconda">Step 1 - Install Anaconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-vscode">Step 2 - Install VScode</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-install-extensions">Recommended: Install extensions</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-open-a-folder-in-vscode-and-start-your-project">Step 4 - Open a folder in VScode and start your project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-download-the-contents-of-this-course-repo">Step 5 - Download the contents of this course repo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-open-a-folder-in-vscode-and-start-your-project">Step 3 - Open a folder in VScode and start your project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-download-the-contents-of-this-course-repo">Step 4 - Download the contents of this course repo</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alternatively-you-can-use-git">Alternatively you can use Git</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-all-dependencies-using-poetry">Step 6 - Install all dependencies using Poetry</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-validate-your-installation">Step 7 - Validate your installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-create-and-activate-a-conda-environment-with-pypsa">Step 5 - Create and activate a conda environment with PyPSA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-validate-your-installation">Step 6 - Validate your installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-it-interactively">Run it interactively</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optionally-add-a-shortcut-for-running-interactively">Optionally: add a shortcut for running interactively</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-conda-commands">Useful Conda Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-not-showing-in-vscode">Environment not showing in VSCode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pypsa-import-errors">PyPSA import errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-micromamba-users">For micromamba users</a></li>
 </ul>
 </li>
 </ul>
@@ -418,8 +439,8 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Install Python and Poetry according to the <a class="reference internal" href="#installation-guide-energy-system-integration"><span class="xref myst">Installation Guide</span></a>, which covers how to set up your PyPSA environment</p></li>
-<li><p>Download the workshop <a class="reference external" href="https://github.com/thesethtruth/esi-course-utwente/tree/main/esi-modelling-workshop/data">data files from the course repository</a>. We’ll use these example datasets throughout the workshop.</p></li>
+<li><p>Install Python and Conda according to the <a class="reference internal" href="#installation-guide-energy-system-integration"><span class="xref myst">Installation Guide</span></a> below, which covers how to set up your PyPSA environment</p></li>
+<li><p>Download the workshop <a class="reference external" href="https://github.com/thesethtruth/esi-course-utwente/tree/main/workshop/data">data files from the course repository</a>. We’ll use these example datasets throughout the workshop.</p></li>
 </ol>
 </section>
 <section id="useful-sources">
@@ -436,11 +457,11 @@
 <section id="data-sources">
 <h3>Data sources<a class="headerlink" href="#data-sources" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://renewables.ninja/">Renewables.ninja</a><br />
+<li><p><a class="reference external" href="https://renewables.ninja/">Renewables.ninja</a>
 <em>(renewable energy generation timeseries)</em></p></li>
-<li><p><a class="reference external" href="https://energytransitionmodel.com/">Energy Transition Model</a><br />
+<li><p><a class="reference external" href="https://energytransitionmodel.com/">Energy Transition Model</a>
 <em>(scenario modelling, demand curves, rich data source)</em></p></li>
-<li><p><a class="reference external" href="https://github.com/PyPSA/technology-data/tree/master/outputs">Technology data</a><br />
+<li><p><a class="reference external" href="https://github.com/PyPSA/technology-data/tree/master/outputs">Technology data</a>
 <em>(costs, emission factors, efficiencies, etc.)</em></p></li>
 </ul>
 </section>
@@ -448,13 +469,13 @@
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="installation-guide-energy-system-integration">
 <h1>Installation Guide: Energy System Integration<a class="headerlink" href="#installation-guide-energy-system-integration" title="Link to this heading">#</a></h1>
-<p>This guide will help you install Python on your computer. Additionally, it will guide you through installing VSCode as your IDE (Integrated Development Environment) and Poetry as your environment manager. Below is a brief introduction explaining why you need these three components and what they do.</p>
+<p>This guide will help you install Python on your computer. Additionally, it will guide you through installing VSCode as your IDE (Integrated Development Environment) and Anaconda as your environment manager. Below is a brief introduction explaining why you need these three components and what they do.</p>
 <blockquote>
 <div><p><strong>Note:</strong> You are free to choose your own IDE, package manager, or even operating system as long as you can use <a class="reference external" href="https://pypsa.readthedocs.io/en/latest/getting-started/installation.html">PyPSA</a>. This guide is written for Windows.</p>
 </div></blockquote>
-<section id="explainer-why-python-vscode-and-poetry">
-<h2>Explainer: Why Python, VSCode, and Poetry?<a class="headerlink" href="#explainer-why-python-vscode-and-poetry" title="Link to this heading">#</a></h2>
-<p>To get started with programming and projects like PyPSA (Python for Power System Analysis), you’ll need a few key tools. Here’s why Python, VSCode, and Poetry are essential:</p>
+<section id="explainer-why-python-vscode-and-conda">
+<h2>Explainer: Why Python, VSCode, and Conda?<a class="headerlink" href="#explainer-why-python-vscode-and-conda" title="Link to this heading">#</a></h2>
+<p>To get started with programming and projects like PyPSA (Python for Power System Analysis), you’ll need a few key tools. Here’s why Python, VSCode, and conda are essential:</p>
 <section id="python">
 <h3>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
 <p><strong>What is Python?</strong>
@@ -462,7 +483,7 @@ Python is a popular, easy-to-learn programming language used for many applicatio
 <p><strong>Why do you need Python?</strong></p>
 <ul class="simple">
 <li><p><strong>Core Language</strong>: PyPSA is written in Python, so you need it to run and modify PyPSA.</p></li>
-<li><p><strong>Libraries</strong>: Python has many libraries that simplify tasks. Poetry helps manage these libraries easily.</p></li>
+<li><p><strong>Libraries</strong>: Python has many libraries that simplify tasks. Conda helps manage these libraries easily.</p></li>
 </ul>
 </section>
 <section id="vscode-visual-studio-code">
@@ -472,73 +493,57 @@ VSCode is a free, powerful code editor developed by Microsoft.</p>
 <p><strong>Why do you need VSCode?</strong></p>
 <ul class="simple">
 <li><p><strong>Easy Coding</strong>: Features like syntax highlighting and code completion make writing Python code simpler.</p></li>
-<li><p><strong>Seamless Integration</strong>: VSCode works well with Python and Poetry, helping you run and manage your projects directly from the editor.</p></li>
+<li><p><strong>Seamless Integration</strong>: VSCode works well with Python and conda, helping you run and manage your projects directly from the editor.</p></li>
 </ul>
 </section>
-<section id="poetry">
-<h3>Poetry<a class="headerlink" href="#poetry" title="Link to this heading">#</a></h3>
-<p><strong>What is Poetry?</strong>
-Poetry manages your Python projects, handling dependencies and virtual environments.</p>
-<p><strong>Why do you need Poetry?</strong></p>
+<section id="anaconda">
+<h3>Anaconda<a class="headerlink" href="#anaconda" title="Link to this heading">#</a></h3>
+<p><strong>What is Anaconda?</strong>
+Anaconda is a distribution of Python that comes with a package manager (conda) and many scientific libraries pre-installed. It includes Anaconda Navigator, a graphical interface that makes managing environments easy.</p>
+<p><strong>Why do you need Anaconda?</strong></p>
 <ul class="simple">
 <li><p><strong>Manage Libraries</strong>: Easily install and update libraries for your projects.</p></li>
 <li><p><strong>Organize Projects</strong>: Keeps your project dependencies isolated and organized, which is crucial when working in VSCode.</p></li>
+<li><p><strong>Pre-configured</strong>: Comes with Python already installed, so you don’t need a separate Python installation.</p></li>
 </ul>
+<blockquote>
+<div><p><strong>For advanced users:</strong> You can also use micromamba instead of Anaconda if you prefer a lightweight command-line tool.</p>
+</div></blockquote>
 <p>These tools work together to make your programming experience smoother and more enjoyable.</p>
 <p>Remember, this guide is for Windows, but you can use these tools on any operating system. Happy coding!</p>
 </section>
 </section>
 <section id="installation-steps">
 <h2>Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading">#</a></h2>
-<section id="step-1-install-python">
-<h3>Step 1 - Install Python<a class="headerlink" href="#step-1-install-python" title="Link to this heading">#</a></h3>
-<p>Install Python 3.12 from the official Python website: <a class="reference external" href="https://www.python.org/downloads/windows/">Python Downloads for Windows</a>. If you don’t know which version you need, you will probably be using the <a class="reference external" href="https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe">64-bit AMD version</a>.</p>
+<section id="step-1-install-anaconda">
+<h3>Step 1 - Install Anaconda<a class="headerlink" href="#step-1-install-anaconda" title="Link to this heading">#</a></h3>
+<p>Download and install Anaconda from the official website: <a class="reference external" href="https://www.anaconda.com/download">Anaconda Downloads</a></p>
+<p>Follow the installation wizard and accept the default settings. This will install Python 3.12 and conda automatically.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Advanced users can use micromamba if they prefer a lightweight CLI alternative.</p>
+</div></blockquote>
 </section>
-<section id="step-2-install-poetry">
-<h3>Step 2 - Install Poetry<a class="headerlink" href="#step-2-install-poetry" title="Link to this heading">#</a></h3>
-<p>You can follow the official guide on <a class="reference external" href="https://python-poetry.org/docs/#installing-with-pipx">Poetry</a>, or follow the steps below.</p>
-<section id="install-pipx">
-<h4>Install pipx<a class="headerlink" href="#install-pipx" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
-</pre></div>
-</div>
-<p>It is possible (even most likely) the above finishes with a WARNING looking similar to this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: The script pipx.exe is installed in `&lt;USER folder&gt;\AppData\Roaming\Python\Python3x\Scripts` which is not on PATH
-</pre></div>
-</div>
-<p>If so, go to the mentioned folder, allowing you to run the pipx executable directly. Enter the following line (even if you did not get the warning):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="se">\p</span>ipx.exe<span class="w"> </span>ensurepath
-</pre></div>
-</div>
-</section>
-<section id="install-poetry">
-<h4>Install poetry<a class="headerlink" href="#install-poetry" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pipx<span class="w"> </span>install<span class="w"> </span>poetry
-</pre></div>
-</div>
-</section>
-</section>
-<section id="step-3-install-vscode">
-<h3>Step 3 - Install VScode<a class="headerlink" href="#step-3-install-vscode" title="Link to this heading">#</a></h3>
+<section id="step-2-install-vscode">
+<h3>Step 2 - Install VScode<a class="headerlink" href="#step-2-install-vscode" title="Link to this heading">#</a></h3>
 <p>Download and install VScode from the official website: <a class="reference external" href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
 <section id="recommended-install-extensions">
 <h4>Recommended: Install extensions<a class="headerlink" href="#recommended-install-extensions" title="Link to this heading">#</a></h4>
 <p>This will make your life easier. Use the extensions tab on the left side (the blocks) to install:</p>
 <ol class="arabic simple">
-<li><p><strong>Python (Microsoft)</strong><br />
+<li><p><strong>Python (Microsoft)</strong>
 <em>Linting, syntax highlighting and suggestions</em></p></li>
-<li><p><strong>Jupyter (Microsoft)</strong><br />
+<li><p><strong>Jupyter (Microsoft)</strong>
 <em>Allows you to run code interactively and easier debugging</em></p></li>
 </ol>
 </section>
 </section>
-<section id="step-4-open-a-folder-in-vscode-and-start-your-project">
-<h3>Step 4 - Open a folder in VScode and start your project<a class="headerlink" href="#step-4-open-a-folder-in-vscode-and-start-your-project" title="Link to this heading">#</a></h3>
+<section id="step-3-open-a-folder-in-vscode-and-start-your-project">
+<h3>Step 3 - Open a folder in VScode and start your project<a class="headerlink" href="#step-3-open-a-folder-in-vscode-and-start-your-project" title="Link to this heading">#</a></h3>
 <p>Make a folder on your desired location. For instance, I use <code class="docutils literal notranslate"><span class="pre">C:\Users\Seth\coding\esi-course</span></code>.</p>
 <p>Open this folder in VScode (through <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Open</span> <span class="pre">Folder...</span></code> or <code class="docutils literal notranslate"><span class="pre">CTRL+K</span></code> and then <code class="docutils literal notranslate"><span class="pre">CTRL+O</span></code>).</p>
 </section>
-<section id="step-5-download-the-contents-of-this-course-repo">
-<h3>Step 5 - Download the contents of this course repo<a class="headerlink" href="#step-5-download-the-contents-of-this-course-repo" title="Link to this heading">#</a></h3>
+<section id="step-4-download-the-contents-of-this-course-repo">
+<h3>Step 4 - Download the contents of this course repo<a class="headerlink" href="#step-4-download-the-contents-of-this-course-repo" title="Link to this heading">#</a></h3>
 <p>Navigate to <a class="github reference external" href="https://github.com/thesethtruth/esi-course-utwente">thesethtruth/esi-course-utwente</a> and use the code button to download the course content as a .zip. Unzip this folder directly in the folder of you choice.</p>
 <section id="alternatively-you-can-use-git">
 <h4>Alternatively you can use Git<a class="headerlink" href="#alternatively-you-can-use-git" title="Link to this heading">#</a></h4>
@@ -547,30 +552,31 @@ Poetry manages your Python projects, handling dependencies and virtual environme
 </div>
 </section>
 </section>
-<section id="step-6-install-all-dependencies-using-poetry">
-<h3>Step 6 - Install all dependencies using Poetry<a class="headerlink" href="#step-6-install-all-dependencies-using-poetry" title="Link to this heading">#</a></h3>
-<p>Make sure you are in the right folder (the one that you just downloaded) and run this command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /esi-course-utwente</span>
-poetry<span class="w"> </span>install
+<section id="step-5-create-and-activate-a-conda-environment-with-pypsa">
+<h3>Step 5 - Create and activate a conda environment with PyPSA<a class="headerlink" href="#step-5-create-and-activate-a-conda-environment-with-pypsa" title="Link to this heading">#</a></h3>
+<p>Open a terminal in VSCode (Terminal &gt; New Terminal) or use Anaconda Prompt. Make sure you are in the course folder.</p>
+<p>Create the environment using the provided <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
 </pre></div>
 </div>
-<p>This will install all the dependencies. Activate the environment with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">poetry</span> <span class="n">shell</span>
+<p>This will create a new isolated environment called <code class="docutils literal notranslate"><span class="pre">esi-course</span></code> with Python 3.12, PyPSA, and all required dependencies.</p>
+<p>Activate the environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>esi-course
 </pre></div>
 </div>
-<p>Select this environment as your Python interpreter in VSCode by using: <code class="docutils literal notranslate"><span class="pre">CRTL+SHIFT+P</span></code> and select the environment name from the list (you should see it in front of your terminal). If you can’t see it, type <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code> in your terminal and use the option <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">interpreter</span> <span class="pre">path...</span></code>. Paste the output of the <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code> in there.</p>
+<p>Select this environment as your Python interpreter in VSCode by using: <code class="docutils literal notranslate"><span class="pre">CTRL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Python:</span> <span class="pre">Select</span> <span class="pre">Interpreter</span></code> and choosing the <code class="docutils literal notranslate"><span class="pre">esi-course</span></code> environment from the list. If you can’t see it, type <code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">python</span></code> (Windows) or <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code> (macOS/Linux) in your activated terminal and use the option <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">interpreter</span> <span class="pre">path...</span></code> to paste the path.</p>
 </section>
-<section id="step-7-validate-your-installation">
-<h3>Step 7 - Validate your installation<a class="headerlink" href="#step-7-validate-your-installation" title="Link to this heading">#</a></h3>
-<p>Run the example from lecture 6 directly using the Play button on top of the screen when you open the Python file. Or use the terminal directly: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">lecture-6/lecture-6-case-example.py</span></code>. This should run without errors.</p>
+<section id="step-6-validate-your-installation">
+<h3>Step 6 - Validate your installation<a class="headerlink" href="#step-6-validate-your-installation" title="Link to this heading">#</a></h3>
+<p>Make sure your conda environment is activated (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">esi-course</span></code>), then run the example from this lecture directly using the Play button on top of the screen when you open the Python file. Or use the terminal directly: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">lecture/lecture-case-example.py</span></code>. This should run without errors.</p>
 <section id="run-it-interactively">
 <h4>Run it interactively<a class="headerlink" href="#run-it-interactively" title="Link to this heading">#</a></h4>
-<p>Use the Jupyter extension to run the file interactively. To do this, open the file and use <code class="docutils literal notranslate"><span class="pre">CRTL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Jupyter:</span> <span class="pre">Run</span> <span class="pre">Current</span> <span class="pre">File</span> <span class="pre">in</span> <span class="pre">Interactive</span> <span class="pre">Window</span></code>. This will open an interactive window, where you can explore variable, rerun code and inspect plots.</p>
+<p>Use the Jupyter extension to run the file interactively. To do this, open the file and use <code class="docutils literal notranslate"><span class="pre">CTRL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Jupyter:</span> <span class="pre">Run</span> <span class="pre">Current</span> <span class="pre">File</span> <span class="pre">in</span> <span class="pre">Interactive</span> <span class="pre">Window</span></code>. This will open an interactive window, where you can explore variables, rerun code and inspect plots.</p>
 </section>
 <section id="optionally-add-a-shortcut-for-running-interactively">
 <h4>Optionally: add a shortcut for running interactively<a class="headerlink" href="#optionally-add-a-shortcut-for-running-interactively" title="Link to this heading">#</a></h4>
 <p>Normally, I run most of my code interactively with Jupyter because it is easier to develop and debug code while writing. For that reason, I have a keyboard shortcut (<code class="docutils literal notranslate"><span class="pre">SHIFT+ENTER</span></code>) that runs the Python file interactively.</p>
-<p>To also use this, use <code class="docutils literal notranslate"><span class="pre">CRTL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Preferences:</span> <span class="pre">Open</span> <span class="pre">Keyboard</span> <span class="pre">Shortcuts</span> <span class="pre">(JSON)</span></code> and add this (only the part between the curly brackets):</p>
+<p>To also use this, use <code class="docutils literal notranslate"><span class="pre">CTRL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Preferences:</span> <span class="pre">Open</span> <span class="pre">Keyboard</span> <span class="pre">Shortcuts</span> <span class="pre">(JSON)</span></code> and add this (only the part between the curly brackets):</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
 <span class="w">    </span><span class="err">...</span>
 <span class="w">    </span><span class="p">{</span>
@@ -583,6 +589,63 @@ poetry<span class="w"> </span>install
 </pre></div>
 </div>
 </section>
+</section>
+</section>
+<section id="useful-conda-commands">
+<h2>Useful Conda Commands<a class="headerlink" href="#useful-conda-commands" title="Link to this heading">#</a></h2>
+<p>Here are some helpful commands for managing your conda environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate/deactivate the environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>esi-course
+conda<span class="w"> </span>deactivate
+
+<span class="c1"># List all conda environments</span>
+conda<span class="w"> </span>env<span class="w"> </span>list
+
+<span class="c1"># List all packages in the current environment</span>
+conda<span class="w"> </span>list
+
+<span class="c1"># Update all packages in the environment</span>
+conda<span class="w"> </span>update<span class="w"> </span>--all
+
+<span class="c1"># Update a specific package (e.g., PyPSA)</span>
+conda<span class="w"> </span>update<span class="w"> </span>pypsa
+
+<span class="c1"># Remove the entire environment if you want to start fresh</span>
+conda<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>esi-course
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="environment-not-showing-in-vscode">
+<h3>Environment not showing in VSCode<a class="headerlink" href="#environment-not-showing-in-vscode" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make sure you’ve activated the environment first: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">esi-course</span></code></p></li>
+<li><p>Restart VSCode after creating the environment</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">CTRL+SHIFT+P</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Python:</span> <span class="pre">Select</span> <span class="pre">Interpreter</span></code> and manually browse to the Python executable</p></li>
+</ul>
+</section>
+<section id="pypsa-import-errors">
+<h3>PyPSA import errors<a class="headerlink" href="#pypsa-import-errors" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Make sure PyPSA is installed: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span> <span class="pre">pypsa</span></code></p></li>
+<li><p>If it’s missing or you have issues, recreate the environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>esi-course
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="for-micromamba-users">
+<h3>For micromamba users<a class="headerlink" href="#for-micromamba-users" title="Link to this heading">#</a></h3>
+<p>If you’re using micromamba instead of Anaconda, replace <code class="docutils literal notranslate"><span class="pre">conda</span></code> with <code class="docutils literal notranslate"><span class="pre">micromamba</span></code> in all commands above.</p>
+<p><strong>Pro tip:</strong> Create an alias so you can just type <code class="docutils literal notranslate"><span class="pre">conda</span></code> instead of <code class="docutils literal notranslate"><span class="pre">micromamba</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Windows (PowerShell):</strong> Add <code class="docutils literal notranslate"><span class="pre">Set-Alias</span> <span class="pre">-Name</span> <span class="pre">conda</span> <span class="pre">-Value</span> <span class="pre">micromamba</span></code> to your PowerShell profile</p></li>
+<li><p><strong>macOS/Linux (bash/zsh):</strong> Add <code class="docutils literal notranslate"><span class="pre">alias</span> <span class="pre">conda=micromamba</span></code> to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code></p></li>
+</ul>
+<p>Then you can use all the commands exactly as written in this guide!</p>
 </section>
 </section>
 <div class="toctree-wrapper compound">
@@ -635,8 +698,7 @@ poetry<span class="w"> </span>install
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -656,34 +718,36 @@ poetry<span class="w"> </span>install
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-guide-energy-system-integration">Installation Guide: Energy System Integration</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-poetry">Explainer: Why Python, VSCode, and Poetry?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explainer-why-python-vscode-and-conda">Explainer: Why Python, VSCode, and Conda?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode-visual-studio-code">VSCode (Visual Studio Code)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry">Poetry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">Anaconda</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-steps">Installation Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-python">Step 1 - Install Python</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-poetry">Step 2 - Install Poetry</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pipx">Install pipx</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-poetry">Install poetry</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-vscode">Step 3 - Install VScode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-anaconda">Step 1 - Install Anaconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-vscode">Step 2 - Install VScode</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-install-extensions">Recommended: Install extensions</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-open-a-folder-in-vscode-and-start-your-project">Step 4 - Open a folder in VScode and start your project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-download-the-contents-of-this-course-repo">Step 5 - Download the contents of this course repo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-open-a-folder-in-vscode-and-start-your-project">Step 3 - Open a folder in VScode and start your project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-download-the-contents-of-this-course-repo">Step 4 - Download the contents of this course repo</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alternatively-you-can-use-git">Alternatively you can use Git</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-all-dependencies-using-poetry">Step 6 - Install all dependencies using Poetry</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-validate-your-installation">Step 7 - Validate your installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-create-and-activate-a-conda-environment-with-pypsa">Step 5 - Create and activate a conda environment with PyPSA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-validate-your-installation">Step 6 - Validate your installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-it-interactively">Run it interactively</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optionally-add-a-shortcut-for-running-interactively">Optionally: add a shortcut for running interactively</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-conda-commands">Useful Conda Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-not-showing-in-vscode">Environment not showing in VSCode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pypsa-import-errors">PyPSA import errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-micromamba-users">For micromamba users</a></li>
 </ul>
 </li>
 </ul>
@@ -713,7 +777,7 @@ By Seth van Wieringen
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>
@@ -737,8 +801,8 @@ By Seth van Wieringen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
