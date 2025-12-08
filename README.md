@@ -22,6 +22,8 @@ Once you have everything installed, explore the lecture materials in the `/lectu
 - `lecture-case-example.py` - Example case to validate your installation
 - `/lecture/data/` - Data files for the lecture examples
 
+**Lecture and workshop slides** are available as PDFs in the `/slides` folder.
+
 Run the example to make sure everything works:
 ```bash
 conda activate esi-course
@@ -77,11 +79,11 @@ The workshop is built using Jupyter Book and automatically deployed via GitHub A
 To build the workshop site locally:
 
 ```bash
-# Install dependencies with uv
-uv sync
+# Install dependencies with uv (including dev dependencies for jupyter-book)
+uv sync --extra dev
 
 # Build the workshop
-jupyter-book build workshop
+uv run jupyter-book build workshop
 ```
 
 The built site will be in `workshop/_build/html`.

@@ -8,9 +8,6 @@ dependencies:
   - seaborn
   - jupyter
   - ipykernel
-  - cairosvg
   - pip
   - pip:
       - highspy
-      - jupyter-book
-      - black

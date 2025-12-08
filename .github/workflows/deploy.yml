@@ -23,7 +23,7 @@ jobs:
       run: pip install uv
 
     - name: Install environment with uv
-      run: uv sync
+      run: uv sync --extra dev
 
     # Build the book
     - name: Build the book
